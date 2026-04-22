@@ -1,65 +1,48 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/atoda/Downloads/index_2.html -->
+<!-- saved from url=(0045)file:///C:/Users/atoda/Downloads/index_5.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>AI Team</title>
-<!--
-╔══════════════════════════════════════════════════════
-║  AI TEAM  v4.0
-║  자가 업데이트 앱 — Claude가 GitHub에 직접 커밋
-╠══════════════════════════════════════════════════════
-║  CHANGELOG
-║  v4.0 (2026-04-22)  자가 업데이트 (GitHub API 커밋)
-║  v3.0 (2026-04-22)  Claude채팅·사용량·음성입력
-║  v2.0 (2026-04-22)  팀저장·2라운드·내보내기
-║  v1.0 (2026-04-22)  최초 출시
-╠══════════════════════════════════════════════════════
-║  설정값: CONFIG 객체 (아래 JS 상단)
-║  모델변경: CONFIG.MODEL
-║  2라운드: CONFIG.ENABLE_ROUND2
-║  프리셋추가: CONFIG.PRESETS 배열
-╚══════════════════════════════════════════════════════
--->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap');
-:root{--bg:#0d0d0f;--surf:#16161a;--surf2:#1e1e24;--bdr:#2a2a32;--text:#e8e8f0;--muted:#6b6b80;--acc:#7c6af7;--red:#ff6b6b;--green:#a8e6cf;--yellow:#ffd93d;}
+:root{--bg:#0d0d0f;--surf:#16161a;--surf2:#1e1e24;--bdr:#2a2a32;--text:#e8e8f0;--muted:#6b6b80;--acc:#7c6af7;--red:#ff6b6b;--green:#a8e6cf;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;display:flex;flex-direction:column;}
 
 /* TOPBAR */
-#topbar{background:var(--surf);border-bottom:1px solid var(--bdr);height:50px;display:flex;align-items:center;gap:8px;padding:0 14px;flex-shrink:0;}
+#topbar{background:var(--surf);border-bottom:1px solid var(--bdr);height:50px;display:flex;align-items:center;gap:6px;padding:0 12px;flex-shrink:0;}
 .logo{font-family:'Space Mono',monospace;font-size:11px;color:var(--acc);letter-spacing:2px;white-space:nowrap;}
-.ver{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);}
-.tabs{display:flex;gap:4px;flex-shrink:0;}
-.tab{font-size:10px;padding:5px 10px;border-radius:8px;background:transparent;border:1px solid var(--bdr);color:var(--muted);cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;}
+.ver{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);white-space:nowrap;}
+.tabs{display:flex;gap:4px;}
+.tab{font-size:10px;padding:5px 9px;border-radius:8px;background:transparent;border:1px solid var(--bdr);color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;}
 .tab.on{background:var(--acc);color:#fff;border-color:var(--acc);}
-#badges{display:flex;gap:4px;flex:1;overflow:hidden;min-width:0;}
+#badges{display:flex;gap:4px;flex:1;overflow:hidden;}
 .bdg{font-size:9px;padding:2px 7px;border-radius:12px;border:1px solid;white-space:nowrap;}
 .rbar{display:flex;gap:5px;align-items:center;flex-shrink:0;}
-.tbtn{font-size:10px;padding:5px 10px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .2s;}
-.tbtn:hover,.tbtn.on{border-color:var(--acc);color:var(--acc);}
+.tbtn{font-size:10px;padding:5px 9px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;white-space:nowrap;}
+.tbtn.on{border-color:var(--acc);color:var(--acc);}
 
 /* LAYOUT */
 #wrap{flex:1;display:flex;overflow:hidden;}
 
 /* PANEL */
-#panel{width:295px;min-width:295px;background:var(--surf);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;transition:width .3s,min-width .3s,border .3s;}
+#panel{width:290px;min-width:290px;background:var(--surf);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;transition:width .3s,min-width .3s;}
 #panel.hide{width:0;min-width:0;border:none;}
 .ptabs{display:flex;border-bottom:1px solid var(--bdr);flex-shrink:0;}
 .ptab{flex:1;padding:9px 4px;font-size:10px;font-weight:600;background:none;border:none;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;}
 .ptab.on{color:var(--acc);border-bottom-color:var(--acc);}
 .pbody{display:none;flex:1;flex-direction:column;overflow:hidden;}
 .pbody.on{display:flex;}
-.pscroll{flex:1;overflow-y:auto;padding:11px;display:flex;flex-direction:column;gap:11px;}
+.pscroll{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:10px;}
 .pscroll::-webkit-scrollbar{width:3px;}
 .pscroll::-webkit-scrollbar-thumb{background:var(--bdr);}
-.sec{font-size:9px;font-family:'Space Mono',monospace;color:var(--muted);letter-spacing:1px;margin-bottom:5px;}
+.sec{font-size:9px;font-family:'Space Mono',monospace;color:var(--muted);letter-spacing:1px;margin-bottom:4px;}
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
-.pc{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:8px;cursor:pointer;transition:all .2s;}
+.pc{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:8px;cursor:pointer;}
 .pc:hover,.pc.on{border-color:var(--acc);background:rgba(124,106,247,.07);}
-.pc-em{font-size:15px;margin-bottom:3px;}
+.pc-em{font-size:14px;margin-bottom:2px;}
 .pc-nm{font-size:10px;font-weight:700;}
 .pc-ds{font-size:9px;color:var(--muted);}
 .mrow{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:9px;margin-bottom:5px;}
@@ -68,19 +51,18 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .nm-inp{flex:1;background:transparent;border:none;color:var(--text);font-size:12px;font-weight:700;outline:none;font-family:inherit;}
 .rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;}
 .rm:hover{color:var(--red);}
-.per-inp{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:6px;color:var(--text);font-family:inherit;font-size:10px;padding:5px 7px;outline:none;resize:none;line-height:1.5;min-height:44px;}
+.per-inp{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:6px;color:var(--text);font-family:inherit;font-size:10px;padding:5px 7px;outline:none;resize:none;line-height:1.5;min-height:42px;}
 .per-inp:focus{border-color:var(--acc);}
-.cdots{display:flex;gap:3px;margin-top:5px;}
+.cdots{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap;}
 .cd{width:13px;height:13px;border-radius:50%;cursor:pointer;border:2px solid transparent;flex-shrink:0;}
-.cd:hover{transform:scale(1.2);}
 .cd.on{border-color:#fff;}
-.add-m{background:none;border:1px dashed var(--bdr);color:var(--muted);border-radius:7px;padding:7px;cursor:pointer;font-size:10px;font-family:inherit;width:100%;transition:all .2s;}
+.add-m{background:none;border:1px dashed var(--bdr);color:var(--muted);border-radius:7px;padding:7px;cursor:pointer;font-size:10px;font-family:inherit;width:100%;}
 .add-m:hover{border-color:var(--acc);color:var(--acc);}
 .sv-row{display:flex;gap:5px;}
 .sv-inp{flex:1;background:var(--surf2);border:1px solid var(--bdr);border-radius:6px;color:var(--text);font-family:inherit;font-size:10px;padding:5px 7px;outline:none;}
 .sv-inp:focus{border-color:var(--acc);}
 .sv-btn{background:var(--acc);color:#fff;border:none;border-radius:6px;padding:5px 9px;cursor:pointer;font-size:10px;font-family:inherit;font-weight:600;}
-.si{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:9px 10px;display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:4px;transition:border-color .2s;}
+.si{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:9px 10px;display:flex;align-items:center;gap:6px;cursor:pointer;margin-bottom:4px;}
 .si:hover{border-color:var(--acc);}
 .si-inf{flex:1;min-width:0;}
 .si-nm{font-size:11px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -88,15 +70,15 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .si-dt{font-size:9px;color:var(--muted);white-space:nowrap;}
 .si-dl{background:none;border:none;color:var(--muted);cursor:pointer;font-size:10px;padding:2px 4px;}
 .si-dl:hover{color:var(--red);}
-.hlpr{border-top:1px solid var(--bdr);padding:9px 11px;flex-shrink:0;}
-.hmsgs{display:flex;flex-direction:column;gap:4px;max-height:110px;overflow-y:auto;margin-bottom:5px;}
+.hlpr{border-top:1px solid var(--bdr);padding:8px 10px;flex-shrink:0;}
+.hmsgs{display:flex;flex-direction:column;gap:4px;max-height:100px;overflow-y:auto;margin-bottom:5px;}
 .hmsg{font-size:10px;line-height:1.5;padding:5px 7px;background:rgba(124,106,247,.07);border:1px solid rgba(124,106,247,.18);border-radius:6px;}
 .hmsg.u{background:rgba(255,255,255,.04);border-color:var(--bdr);}
 .hrow{display:flex;gap:4px;}
 .h-inp{flex:1;background:var(--surf2);border:1px solid var(--bdr);border-radius:6px;color:var(--text);font-family:inherit;font-size:10px;padding:5px 7px;outline:none;}
 .h-inp:focus{border-color:var(--acc);}
 .h-go{background:var(--acc);color:#fff;border:none;border-radius:6px;width:27px;height:27px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
-.pftr{padding:9px 11px;border-top:1px solid var(--bdr);display:flex;gap:5px;flex-shrink:0;}
+.pftr{padding:9px 10px;border-top:1px solid var(--bdr);display:flex;gap:5px;flex-shrink:0;}
 .p-apply{flex:1;background:var(--acc);color:#fff;border:none;border-radius:8px;padding:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;}
 .p-reset{background:none;color:var(--muted);border:1px solid var(--bdr);border-radius:8px;padding:8px 10px;cursor:pointer;font-family:inherit;font-size:11px;}
 
@@ -104,11 +86,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 #cont{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
 .ctab{display:none;flex:1;flex-direction:column;overflow:hidden;}
 .ctab.on{display:flex;}
-.chat{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:11px;}
+.chat{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
 .chat::-webkit-scrollbar{width:4px;}
 .chat::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px;}
 
-/* Welcome */
 .welcome{text-align:center;padding:36px 16px;color:var(--muted);}
 .welcome h2{font-size:17px;font-weight:500;color:var(--text);margin-bottom:7px;}
 .welcome p{font-size:12px;line-height:1.8;}
@@ -117,7 +98,6 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .wnm{font-size:11px;font-weight:700;margin-bottom:2px;}
 .wds{font-size:9px;color:var(--muted);line-height:1.5;}
 
-/* Messages */
 .mu{display:flex;justify-content:flex-end;padding:0 3px;}
 .bu{background:var(--acc);color:#fff;padding:8px 12px;border-radius:15px 15px 4px 15px;max-width:70%;font-size:13px;line-height:1.6;word-break:break-word;}
 .tlbl{text-align:center;font-size:9px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;}
@@ -135,42 +115,33 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .st-neutral{background:rgba(107,107,128,.15);color:#8888a8;}
 .modbl{background:rgba(184,184,208,.04);border:1px solid rgba(184,184,208,.14);border-radius:8px;padding:9px 11px;font-size:12px;color:#b0b0c8;line-height:1.7;}
 .modlbl{font-size:8px;font-family:'Space Mono',monospace;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px;}
-
-/* Claude / Dev chat */
 .cai{display:flex;gap:7px;padding:0 3px;}
 .caibl{background:var(--surf);border:1px solid var(--bdr);border-radius:4px 11px 11px 11px;padding:9px 11px;font-size:13px;line-height:1.7;flex:1;word-break:break-word;white-space:pre-wrap;}
-.sysmsg{background:rgba(184,184,208,.04);border:1px solid rgba(184,184,208,.12);border-radius:7px;padding:7px 10px;font-size:11px;color:var(--muted);line-height:1.6;}
-
-/* Deploy status */
-.deploy-bar{background:rgba(168,230,207,.08);border:1px solid rgba(168,230,207,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);display:flex;align-items:center;gap:8px;}
-.deploy-bar.err{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.25);color:var(--red);}
-.deploy-bar.ing{background:rgba(124,106,247,.08);border-color:rgba(124,106,247,.25);color:var(--acc);}
-
-/* Loading */
+.sysmsg{background:rgba(184,184,208,.04);border:1px solid rgba(184,184,208,.12);border-radius:7px;padding:7px 10px;font-size:11px;color:var(--muted);line-height:1.6;white-space:pre-wrap;}
+.deploy-bar{border-radius:8px;padding:9px 12px;font-size:12px;display:flex;align-items:center;gap:8px;border:1px solid;}
+.deploy-bar.ing{background:rgba(124,106,247,.08);border-color:rgba(124,106,247,.3);color:var(--acc);}
+.deploy-bar.ok{background:rgba(168,230,207,.08);border-color:rgba(168,230,207,.3);color:var(--green);}
+.deploy-bar.err{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.3);color:var(--red);}
 .ld{display:flex;gap:7px;align-items:center;padding:3px;}
 .dots span{display:inline-block;width:4px;height:4px;background:var(--acc);border-radius:50%;margin:0 2px;animation:bnc 1.2s infinite;}
 .dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
 @keyframes bnc{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
 .ldtxt{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;}
-
-/* Input bar */
 .ibar{padding:9px 12px 11px;border-top:1px solid var(--bdr);flex-shrink:0;}
 .irow{display:flex;gap:6px;align-items:flex-end;}
-.ibox{flex:1;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;color:var(--text);font-family:inherit;font-size:13px;padding:9px 11px;resize:none;min-height:42px;max-height:105px;outline:none;line-height:1.5;transition:border-color .2s;}
+.ibox{flex:1;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;color:var(--text);font-family:inherit;font-size:13px;padding:9px 11px;resize:none;min-height:42px;max-height:105px;outline:none;line-height:1.5;}
 .ibox:focus{border-color:var(--acc);}
 .ibox::placeholder{color:var(--muted);}
 .ibtns{display:flex;flex-direction:column;gap:4px;}
-.ib{width:38px;height:38px;border-radius:9px;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.ib{width:38px;height:38px;border-radius:9px;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
 .ib.send{background:var(--acc);color:#fff;}
-.ib.send:hover{opacity:.85;}
 .ib.send:disabled{opacity:.4;cursor:default;}
 .ib.mic{background:var(--surf2);color:var(--muted);border:1px solid var(--bdr);}
-.ib.mic.rec{background:var(--red);color:#fff;border-color:var(--red);animation:pulse .8s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.ib.mic.rec{background:var(--red);color:#fff;border-color:var(--red);}
 .hint{font-size:9px;color:var(--muted);text-align:center;margin-top:4px;}
 
-/* Usage */
-#utab{overflow-y:auto;padding:18px;}
+/* USAGE */
+.uscroll{flex:1;overflow-y:auto;padding:18px;}
 .ugrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:14px;}
 .uc{background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:12px 14px;}
 .uc-lbl{font-size:9px;font-family:'Space Mono',monospace;color:var(--muted);margin-bottom:5px;letter-spacing:1px;}
@@ -180,31 +151,36 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .utbl{width:100%;border-collapse:collapse;font-size:11px;}
 .utbl th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bdr);color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;}
 .utbl td{padding:6px 8px;border-bottom:1px solid var(--bdr);}
-.utit{font-size:11px;font-weight:700;margin-bottom:8px;}
+.utit{font-size:11px;font-weight:700;margin-bottom:8px;margin-top:16px;}
 
-/* Settings tab */
-#stab{overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:18px;max-width:540px;}
+/* SETTINGS */
+.sscroll{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;max-width:560px;}
 .scard{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;padding:16px;}
 .scard-title{font-size:12px;font-weight:700;margin-bottom:4px;}
-.scard-desc{font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.scard-desc{font-size:10px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.scard-desc a{color:var(--acc);}
+.scard-desc code{color:var(--acc);font-family:'Space Mono',monospace;}
 .sfield{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
-.sfield label{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.5px;}
+.sfield label{font-size:9px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.5px;}
 .sinp{background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;color:var(--text);font-family:inherit;font-size:11px;padding:7px 10px;outline:none;width:100%;}
 .sinp:focus{border-color:var(--acc);}
-.s-save{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;}
-.s-save:hover{opacity:.85;}
-.s-test{background:transparent;color:var(--acc);border:1px solid var(--acc);border-radius:8px;padding:8px 14px;cursor:pointer;font-family:inherit;font-size:11px;margin-left:6px;}
-.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;}
-.status-ok{background:var(--green);}
-.status-no{background:var(--red);}
-.status-un{background:var(--muted);}
+.sbtn{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;}
+.sbtn:hover{opacity:.85;}
+.sbtn.ghost{background:transparent;border:1px solid var(--acc);color:var(--acc);}
+.sbtn.danger{background:var(--red);}
+.srow{display:flex;align-items:center;gap:8px;margin-top:4px;}
+.sdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;}
+.sdot.ok{background:var(--green);}
+.sdot.no{background:var(--red);}
+.sdot.un{background:var(--muted);}
+.sstat{font-size:10px;color:var(--muted);}
 
-/* Emoji picker */
+/* EMOJI PICKER */
 .epick{position:fixed;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:6px;display:flex;flex-wrap:wrap;gap:2px;width:168px;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.6);}
 .eo{font-size:15px;cursor:pointer;padding:3px;border-radius:5px;}
 .eo:hover{background:var(--surf2);}
 
-/* Toast */
+/* TOAST */
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:7px 16px;font-size:12px;z-index:9999;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.5);}
 
 .xbtn{background:var(--surf2);border:1px solid var(--bdr);color:var(--muted);border-radius:7px;padding:4px 9px;cursor:pointer;font-size:10px;font-family:inherit;}
@@ -214,7 +190,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   #panel{position:fixed;top:50px;left:0;height:calc(100dvh - 50px);z-index:100;box-shadow:4px 0 20px rgba(0,0,0,.5);}
   .bu{max-width:84%;}
   .wgrid{grid-template-columns:1fr;}
-  .tab{padding:4px 7px;font-size:9px;}
+  .tab{padding:4px 6px;font-size:9px;}
+  .sscroll{max-width:100%;}
 }
 </style>
 </head>
@@ -224,7 +201,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="logo">AI TEAM</div>
   <div class="ver">v4.0</div>
   <div class="tabs">
-    <button class="tab on" onclick="switchTab(&#39;disc&#39;,this)">💬 팀 토론</button>
+    <button class="tab on" onclick="switchTab(&#39;disc&#39;,this)">💬 토론</button>
     <button class="tab" onclick="switchTab(&#39;dev&#39;,this)">🤖 Claude</button>
     <button class="tab" onclick="switchTab(&#39;usage&#39;,this)">📊 사용량</button>
     <button class="tab" onclick="switchTab(&#39;settings&#39;,this)">⚙ 설정</button>
@@ -237,7 +214,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 <div id="wrap">
 
-  <!-- PANEL -->
+  <!-- 팀 설정 패널 -->
   <div id="panel">
     <div class="ptabs">
       <button class="ptab on" onclick="switchPTab(&#39;edit&#39;,this)">✏️ 편집</button>
@@ -245,13 +222,28 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     </div>
     <div class="pbody on" id="pb-edit">
       <div class="pscroll">
-        <div><div class="sec">PRESETS</div><div class="pgrid" id="preset-grid"></div></div>
-        <div><div class="sec">TEAM MEMBERS</div><div id="meditor"></div><button class="add-m" onclick="addMember()">+ 팀원 추가</button></div>
-        <div><div class="sec">SAVE TEAM</div><div class="sv-row"><input class="sv-inp" id="sv-name" placeholder="팀 이름..."><button class="sv-btn" onclick="saveTeam()">저장</button></div></div>
+        <div>
+          <div class="sec">PRESETS</div>
+          <div class="pgrid" id="preset-grid"></div>
+        </div>
+        <div>
+          <div class="sec">TEAM MEMBERS</div>
+          <div id="meditor"></div>
+          <button class="add-m" onclick="addMember()">+ 팀원 추가</button>
+        </div>
+        <div>
+          <div class="sec">SAVE TEAM</div>
+          <div class="sv-row">
+            <input class="sv-inp" id="sv-name" placeholder="팀 이름...">
+            <button class="sv-btn" onclick="saveTeam()">저장</button>
+          </div>
+        </div>
       </div>
       <div class="hlpr">
         <div class="sec" style="margin-bottom:4px">💬 AI 역할 도우미</div>
-        <div class="hmsgs" id="hmsgs"><div class="hmsg">어떤 목적의 팀인지 알려주시면 구성을 제안해드릴게요.</div></div>
+        <div class="hmsgs" id="hmsgs">
+          <div class="hmsg">어떤 목적의 팀인지 알려주시면 구성을 제안해드릴게요.</div>
+        </div>
         <div class="hrow">
           <input class="h-inp" id="h-inp" placeholder="어떤 팀이 필요하세요?" onkeydown="if(event.key===&#39;Enter&#39;)sendHelper()">
           <button class="h-go" onclick="sendHelper()">↑</button>
@@ -263,14 +255,17 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       </div>
     </div>
     <div class="pbody" id="pb-saved">
-      <div class="pscroll"><div class="sec">SAVED TEAMS</div><div id="saved-list"></div></div>
+      <div class="pscroll">
+        <div class="sec">SAVED TEAMS</div>
+        <div id="saved-list"></div>
+      </div>
     </div>
   </div>
 
-  <!-- CONTENT -->
+  <!-- 컨텐츠 영역 -->
   <div id="cont">
 
-    <!-- 팀 토론 -->
+    <!-- 팀 토론 탭 -->
     <div class="ctab on" id="t-disc">
       <div class="chat" id="disc-chat">
         <div class="welcome" id="welcome">
@@ -291,14 +286,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       </div>
     </div>
 
-    <!-- Claude 채팅 (자가 업데이트 포함) -->
+    <!-- Claude 채팅 탭 -->
     <div class="ctab" id="t-dev">
       <div style="background:var(--surf2);border-bottom:1px solid var(--bdr);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-        <div>
-          <span style="font-size:11px;font-weight:600">🤖 Claude 채팅</span>
-          <span style="font-size:10px;color:var(--muted);margin-left:8px">일반 대화 + 앱 수정 요청 → 자동 GitHub 커밋 → 자동 배포</span>
-        </div>
-        <div style="display:flex;gap:6px">
+        <span style="font-size:10px;color:var(--muted)">🤖 일반 대화 + 앱 수정 요청 → GitHub 자동 커밋 → 자동 배포</span>
+        <div style="display:flex;gap:6px;">
           <button class="xbtn" onclick="exportDevChat()">내보내기</button>
           <button class="xbtn" onclick="clearDevChat()">초기화</button>
         </div>
@@ -306,91 +298,112 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="chat" id="dev-chat"></div>
       <div class="ibar">
         <div class="irow">
-          <textarea class="ibox" id="c-inp" placeholder="Claude에게 말하세요. &#39;이 기능 추가해줘&#39;, &#39;디자인 바꿔줘&#39; 등 앱 수정도 가능합니다..." rows="1"></textarea>
+          <textarea class="ibox" id="c-inp" placeholder="Claude에게 말하세요. 앱 수정 요청도 가능합니다..." rows="1"></textarea>
           <div class="ibtns">
             <button class="ib mic" id="mic-c" onclick="toggleMic(&#39;c&#39;)" title="음성입력">🎤</button>
             <button class="ib send" id="send-c" onclick="sendDev()">↑</button>
           </div>
         </div>
-        <div class="hint">Enter 전송 · Shift+Enter 줄바꿈 · 앱 수정 요청 시 GitHub에 자동 커밋</div>
+        <div class="hint">Enter 전송 · Shift+Enter 줄바꿈 · 앱 수정 요청 시 GitHub 자동 커밋</div>
       </div>
     </div>
 
-    <!-- 사용량 -->
+    <!-- 사용량 탭 -->
     <div class="ctab" id="t-usage">
-      <div id="utab">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-          <div style="font-size:14px;font-weight:700">API 사용량</div>
+      <div class="uscroll">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <div style="font-size:14px;font-weight:700">📊 API 사용량</div>
           <button class="xbtn" onclick="renderUsage()">새로고침</button>
         </div>
-        <div style="font-size:10px;color:var(--muted);margin-bottom:12px">claude-sonnet-4 기준 · Input $3 / Output $15 per 1M tokens</div>
-        <div class="utit">전체 누적</div><div class="ugrid" id="u-total"></div>
-        <div class="utit" style="margin-top:14px">오늘</div><div class="ugrid" id="u-today"></div>
-        <div class="utit" style="margin-top:14px">최근 7일</div>
-        <table class="utbl"><thead><tr><th>날짜</th><th>입력 토큰</th><th>출력 토큰</th><th>호출</th><th>USD</th><th>KRW</th></tr></thead><tbody id="u-daily"></tbody></table>
-        <div style="margin-top:14px"><button class="xbtn" onclick="if(confirm(&#39;초기화할까요?&#39;))resetUsage()">기록 초기화</button></div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:14px">claude-sonnet-4 기준 · Input $3 / Output $15 per 1M tokens</div>
+        <div class="utit">전체 누적</div>
+        <div class="ugrid" id="u-total"></div>
+        <div class="utit">오늘</div>
+        <div class="ugrid" id="u-today"></div>
+        <div class="utit">최근 7일</div>
+        <table class="utbl">
+          <thead><tr><th>날짜</th><th>입력</th><th>출력</th><th>호출</th><th>USD</th><th>KRW</th></tr></thead>
+          <tbody id="u-daily"></tbody>
+        </table>
+        <div style="margin-top:14px">
+          <button class="xbtn" onclick="if(confirm(&#39;사용량 기록을 초기화할까요?&#39;))resetUsage()">기록 초기화</button>
+        </div>
       </div>
     </div>
 
-    <!-- 설정 -->
+    <!-- 설정 탭 -->
     <div class="ctab" id="t-settings">
-      <div id="stab">
-        <div style="font-size:15px;font-weight:700;margin-bottom:4px">⚙ 설정</div>
-        <div style="font-size:11px;color:var(--muted);margin-bottom:16px">처음 한 번만 설정하면 이후 앱 안에서 모든 관리가 가능합니다.</div>
+      <div class="sscroll">
+        <div style="font-size:15px;font-weight:700;margin-bottom:2px">⚙ 설정</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">처음 한 번만 입력하면 이후 앱 안에서 모든 관리가 가능합니다.</div>
 
         <!-- Anthropic API Key -->
         <div class="scard">
           <div class="scard-title">🔑 Anthropic API Key</div>
-          <div class="scard-desc">Claude API를 사용하기 위한 키입니다.<br><a href="https://console.anthropic.com/" target="_blank" style="color:var(--acc)">console.anthropic.com</a>에서 발급하세요.</div>
-          <div class="sfield"><label>API KEY</label><input class="sinp" id="s-apikey" type="password" placeholder="sk-ant-..."></div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <button class="s-save" onclick="saveSettings(&#39;apikey&#39;)">저장</button>
-            <button class="s-test" onclick="testApiKey()">연결 테스트</button>
-            <span id="apikey-status"><span class="status-dot status-un"></span><span style="font-size:10px;color:var(--muted)">미확인</span></span>
+          <div class="scard-desc">
+            Claude API를 사용하기 위한 키입니다.<br>
+            <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a> → API Keys → Create Key
+          </div>
+          <div class="sfield">
+            <label>API KEY</label>
+            <input class="sinp" id="s-apikey" type="password" placeholder="sk-ant-api03-...">
+          </div>
+          <div class="srow">
+            <button class="sbtn" onclick="saveApiKey()">저장</button>
+            <button class="sbtn ghost" onclick="testApiKey()">연결 테스트</button>
+            <span id="apikey-stat"><span class="sdot un"></span><span class="sstat">미확인</span></span>
           </div>
         </div>
 
         <!-- GitHub -->
         <div class="scard">
-          <div class="scard-title">🐙 GitHub 설정</div>
+          <div class="scard-title">🐙 GitHub 설정 (앱 자동 업데이트용)</div>
           <div class="scard-desc">
-            앱 수정 요청 시 Claude가 이 레포에 직접 커밋합니다.<br>
-            <strong style="color:var(--text)">설정 방법:</strong><br>
-            1. GitHub에서 레포 생성 (예: <code style="color:var(--acc)">my-aiteam</code>)<br>
-            2. <code style="color:var(--acc)">index.html</code> 파일 하나 업로드<br>
-            3. <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--acc)">Personal Access Token</a> 발급 (repo 권한)<br>
-            4. 아래에 입력 후 저장
+            Claude 채팅에서 앱 수정 요청 시 이 레포에 직접 커밋합니다.<br><br>
+            <strong style="color:var(--text)">GitHub Token 발급:</strong><br>
+            github.com → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → <code>repo</code> 체크 → 생성
           </div>
-          <div class="sfield"><label>GITHUB TOKEN</label><input class="sinp" id="s-ghtoken" type="password" placeholder="ghp_..."></div>
-          <div class="sfield"><label>USERNAME / ORG</label><input class="sinp" id="s-ghowner" placeholder="예: myusername"></div>
-          <div class="sfield"><label>REPO NAME</label><input class="sinp" id="s-ghrepo" placeholder="예: my-aiteam"></div>
-          <div class="sfield"><label>BRANCH</label><input class="sinp" id="s-ghbranch" placeholder="main"></div>
-          <div class="sfield"><label>FILE PATH</label><input class="sinp" id="s-ghpath" placeholder="index.html"></div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <button class="s-save" onclick="saveSettings(&#39;github&#39;)">저장</button>
-            <button class="s-test" onclick="testGithub()">연결 테스트</button>
-            <span id="gh-status"><span class="status-dot status-un"></span><span style="font-size:10px;color:var(--muted)">미확인</span></span>
+          <div class="sfield">
+            <label>GITHUB TOKEN</label>
+            <input class="sinp" id="s-ghtoken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+          </div>
+          <div class="sfield">
+            <label>GITHUB USERNAME</label>
+            <input class="sinp" id="s-ghowner" placeholder="예: 123idon">
+          </div>
+          <div class="sfield">
+            <label>REPO NAME</label>
+            <input class="sinp" id="s-ghrepo" placeholder="예: aiteam">
+          </div>
+          <div class="sfield">
+            <label>BRANCH (기본: main)</label>
+            <input class="sinp" id="s-ghbranch" placeholder="main">
+          </div>
+          <div class="sfield">
+            <label>FILE PATH (기본: index.html)</label>
+            <input class="sinp" id="s-ghpath" placeholder="index.html">
+          </div>
+          <div class="srow">
+            <button class="sbtn" onclick="saveGithub()">저장</button>
+            <button class="sbtn ghost" onclick="testGithub()">연결 테스트</button>
+            <span id="gh-stat"><span class="sdot un"></span><span class="sstat">미확인</span></span>
           </div>
         </div>
 
-        <!-- Cloudflare -->
+        <!-- Cloudflare 안내 -->
         <div class="scard">
-          <div class="scard-title">☁ Cloudflare Pages 연결 방법</div>
+          <div class="scard-title">☁ Cloudflare Pages (이미 연결됨!)</div>
           <div class="scard-desc">
-            <strong style="color:var(--text)">최초 1회 설정 (5분):</strong><br>
-            1. <a href="https://pages.cloudflare.com/" target="_blank" style="color:var(--acc)">pages.cloudflare.com</a> → Create a project<br>
-            2. "Connect to Git" → GitHub 레포 선택<br>
-            3. Framework preset: None, Build output: / (루트)<br>
-            4. Deploy!<br><br>
-            이후 GitHub에 커밋되면 <strong style="color:var(--green)">자동으로 배포</strong>됩니다.
+            GitHub에 커밋되면 Cloudflare Pages가 자동으로 감지해서 배포합니다.<br>
+            추가 설정 없이 GitHub Token만 저장하면 자동 업데이트가 동작합니다. ✅
           </div>
         </div>
 
-        <!-- Danger zone -->
+        <!-- 위험 구역 -->
         <div class="scard" style="border-color:rgba(255,107,107,.3)">
-          <div class="scard-title" style="color:var(--red)">⚠ 초기화</div>
-          <div class="scard-desc">모든 설정·저장된 팀·대화·사용량을 삭제합니다.</div>
-          <button class="s-save" style="background:var(--red)" onclick="if(confirm(&#39;정말 초기화할까요?&#39;))hardReset()">전체 초기화</button>
+          <div class="scard-title" style="color:var(--red)">⚠ 전체 초기화</div>
+          <div class="scard-desc">저장된 팀, 대화, 사용량, 설정을 모두 삭제합니다.</div>
+          <button class="sbtn danger" onclick="hardReset()">전체 초기화</button>
         </div>
       </div>
     </div>
@@ -399,34 +412,26 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 </div>
 
 <script>
-// ╔══════════════════════════════════════════════════
-// ║  CONFIG
-// ╚══════════════════════════════════════════════════
-const CONFIG = {
-  MODEL:            "claude-sonnet-4-20250514",
-  MAX_TOKENS:       1500,
-  API_URL:          "https://api.anthropic.com/v1/messages",
-  ENABLE_ROUND2:    true,
-  MAX_TEAM_SIZE:    6,
-  MAX_SAVED:        20,
-  ASSISTANT_WINDOW: 20,
-  PRICE_INPUT:      3.0,
-  PRICE_OUTPUT:     15.0,
-  KRW_RATE:         1380,
+// ── CONFIG ──────────────────────────────────────
+const C = {
+  MODEL:    "claude-sonnet-4-20250514",
+  MAX_TOK:  1500,
+  API_URL:  "https://api.anthropic.com/v1/messages",
+  R2:       true,   // 2라운드 토론
+  WIN:      20,     // Claude 채팅 슬라이딩 윈도우
+  P_IN:     3.0,    // USD per 1M input tokens
+  P_OUT:    15.0,   // USD per 1M output tokens
+  KRW:      1380,
+  MAX_TEAM: 6,
+  MAX_SAVE: 20,
   SK: {
-    APIKEY:   "at_apikey_v4",
-    GHTOKEN:  "at_ghtoken_v4",
-    GHOWNER:  "at_ghowner_v4",
-    GHREPO:   "at_ghrepo_v4",
-    GHBRANCH: "at_ghbranch_v4",
-    GHPATH:   "at_ghpath_v4",
-    TEAMS:    "at_teams_v4",
-    CHAT:     "at_chat_v4",
-    USAGE:    "at_usage_v4",
+    APIKEY: "at_key_v4", GHTOKEN:"at_ght_v4", GHOWNER:"at_gho_v4",
+    GHREPO: "at_ghr_v4", GHBRANCH:"at_ghb_v4", GHPATH:"at_ghp_v4",
+    TEAMS:  "at_teams_v4", CHAT:"at_chat_v4", USAGE:"at_usage_v4",
   },
   COLORS: ["#ff6b6b","#4ecdc4","#ffd93d","#a8e6cf","#c3b1e1","#ff9f43","#74b9ff","#fd79a8"],
   EMOJIS: ["🔥","💡","📊","🌿","😈","😇","🎯","🎨","📖","✂️","🌟","🚀","⚖️","🧭","🔬","📣","👥","📈","💎","🦁","🐺","🦊","🤖","👑","🧠","🎭","🏆","⚡","🌊","🎪"],
-  DEFAULT_MEMBERS: [
+  DEF: [
     {id:"d1",emoji:"🔥",name:"민준",color:"#ff6b6b",persona:"날카롭고 직설적인 비판가. 어떤 주장이든 허점과 반론을 찾아냄. 쉽게 동의하지 않고 논리적 오류 지적. 말투는 짧고 직접적이며 가끔 도발적."},
     {id:"d2",emoji:"💡",name:"소연",color:"#4ecdc4",persona:"엉뚱하고 창의적인 아이디어 메이커. 기존 틀을 깨는 발상 즐김. 말투는 발랄하고 열정적이며 예상 밖 관점 제시."},
     {id:"d3",emoji:"📊",name:"지훈",color:"#ffd93d",persona:"냉철한 현실주의자. 실현 가능성, 비용, 리스크 항상 따짐. 감정보다 데이터와 논리 중시. 말투는 건조하고 분석적."},
@@ -460,237 +465,244 @@ const CONFIG = {
   ],
 };
 
-// ── SYSTEM PROMPT (자가 업데이트용) ──────────────
-function buildSystemPrompt() {
-  const src = document.documentElement.outerHTML;
-  return `당신은 AI Team 앱에 내장된 Claude입니다.
-
-[역할]
-1. 일반 대화 상대 — 한국어로 친근하게
-2. 앱 수정 요청 처리 — 사용자가 앱 기능 추가/수정/디자인 변경을 요청하면:
-   a) 수정된 전체 HTML을 생성
-   b) 반드시 아래 형식의 블록으로 감싸서 반환:
-   <<<DEPLOY_START>>>
-   (수정된 전체 index.html 내용)
-   <<<DEPLOY_END>>>
-   c) 배포 블록 외 설명도 함께 작성
-
-[중요 규칙]
-- 앱 수정 시 반드시 전체 HTML을 반환 (부분 수정 금지)
-- CHANGELOG의 버전을 올려서 반환
-- CONFIG 객체의 설정값은 보존
-- localStorage 키(CONFIG.SK)는 변경 금지 (데이터 날아감)
-- 현재 앱 소스코드는 아래와 같습니다:
-
-${src.slice(0, 80000)}`; // 토큰 절약을 위해 80000자 제한
-}
-
-// ╔══════════════════════════════════════════════════
-// ║  STATE
-// ╚══════════════════════════════════════════════════
-let members  = cloneDeep(CONFIG.DEFAULT_MEMBERS);
+// ── STATE ────────────────────────────────────────
+let members   = cd(C.DEF);
 let panelOpen = true;
 let epickEl   = null;
 let micTarget = null;
 let recog     = null;
 let discLoad  = false;
 let devLoad   = false;
-let devHist   = JSON.parse(ls(CONFIG.SK.CHAT) || "[]"); // Claude 채팅 히스토리
+let devHist   = JSON.parse(ls(C.SK.CHAT)||"[]");
+let discHist  = [];
 let exportLog = [];
 
-// ╔══════════════════════════════════════════════════
-// ║  INIT
-// ╚══════════════════════════════════════════════════
-document.addEventListener("DOMContentLoaded", () => {
+// ── INIT ─────────────────────────────────────────
+window.addEventListener("DOMContentLoaded", () => {
   renderPresets();
   renderEditor();
   renderBadges();
   renderWelcome();
   loadSettings();
-  loadDevChatHistory();
+  initDevChat();
   renderUsage();
   initVoice();
 
   ["d-inp","c-inp"].forEach(id => {
     const el = g(id);
-    el.addEventListener("input", () => { el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,105)+"px"; });
+    el.addEventListener("input", () => {
+      el.style.height = "auto";
+      el.style.height = Math.min(el.scrollHeight, 105) + "px";
+    });
     el.addEventListener("keydown", e => {
-      if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); id==="d-inp"?sendDisc():sendDev(); }
+      if(e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        id === "d-inp" ? sendDisc() : sendDev();
+      }
     });
   });
 });
 
-// ╔══════════════════════════════════════════════════
-// ║  SETTINGS
-// ╚══════════════════════════════════════════════════
-function loadSettings() {
-  const fields = {
-    "s-apikey":   CONFIG.SK.APIKEY,
-    "s-ghtoken":  CONFIG.SK.GHTOKEN,
-    "s-ghowner":  CONFIG.SK.GHOWNER,
-    "s-ghrepo":   CONFIG.SK.GHREPO,
-    "s-ghbranch": CONFIG.SK.GHBRANCH,
-    "s-ghpath":   CONFIG.SK.GHPATH,
-  };
-  Object.entries(fields).forEach(([id, key]) => {
-    const val = ls(key);
-    if(val) g(id).value = val;
-  });
-  if(ls(CONFIG.SK.GHBRANCH) === null) g("s-ghbranch").value = "main";
-  if(ls(CONFIG.SK.GHPATH)   === null) g("s-ghpath").value   = "index.html";
+// ── TAB / PANEL ──────────────────────────────────
+function switchTab(key, btn) {
+  document.querySelectorAll(".tab").forEach(b => b.classList.remove("on"));
+  if(btn) btn.classList.add("on");
+  document.querySelectorAll(".ctab").forEach(t => t.classList.remove("on"));
+  g("t-" + key).classList.add("on");
+  const pb = g("panel-btn");
+  if(key !== "disc") {
+    if(panelOpen) togglePanel();
+    pb.style.visibility = "hidden";
+  } else {
+    pb.style.visibility = "visible";
+  }
+  if(key === "usage") renderUsage();
 }
 
-function saveSettings(type) {
-  if(type === "apikey") {
-    const k = g("s-apikey").value.trim();
-    if(!k) { toast("API 키를 입력해주세요"); return; }
-    lss(CONFIG.SK.APIKEY, k);
-    toast("API 키 저장됐어요!");
-  } else if(type === "github") {
-    const fields = {
-      "s-ghtoken":  CONFIG.SK.GHTOKEN,
-      "s-ghowner":  CONFIG.SK.GHOWNER,
-      "s-ghrepo":   CONFIG.SK.GHREPO,
-      "s-ghbranch": CONFIG.SK.GHBRANCH,
-      "s-ghpath":   CONFIG.SK.GHPATH,
-    };
-    let ok = true;
-    Object.entries(fields).forEach(([id, key]) => {
-      const val = g(id).value.trim();
-      if(!val && id !== "s-ghbranch" && id !== "s-ghpath") { ok = false; return; }
-      lss(key, val || (id==="s-ghbranch"?"main":"index.html"));
-    });
-    if(!ok) { toast("Token, Username, Repo는 필수입니다"); return; }
-    toast("GitHub 설정 저장됐어요!");
+function togglePanel() {
+  panelOpen = !panelOpen;
+  g("panel").classList.toggle("hide", !panelOpen);
+  g("panel-btn").classList.toggle("on", panelOpen);
+  g("panel-btn").textContent = panelOpen ? "✕ 닫기" : "👥 팀 설정";
+}
+
+function switchPTab(key, btn) {
+  document.querySelectorAll(".ptab").forEach(b => b.classList.remove("on"));
+  document.querySelectorAll(".pbody").forEach(b => b.classList.remove("on"));
+  btn.classList.add("on");
+  g("pb-" + key).classList.add("on");
+  if(key === "saved") renderSavedList();
+}
+
+// ── SETTINGS ─────────────────────────────────────
+function loadSettings() {
+  const map = {
+    "s-apikey": C.SK.APIKEY, "s-ghtoken": C.SK.GHTOKEN,
+    "s-ghowner": C.SK.GHOWNER, "s-ghrepo": C.SK.GHREPO,
+    "s-ghbranch": C.SK.GHBRANCH, "s-ghpath": C.SK.GHPATH,
+  };
+  Object.entries(map).forEach(([id, key]) => {
+    const v = ls(key);
+    if(v) g(id).value = v;
+  });
+  if(!ls(C.SK.GHBRANCH)) g("s-ghbranch").value = "main";
+  if(!ls(C.SK.GHPATH))   g("s-ghpath").value   = "index.html";
+  if(ls(C.SK.APIKEY))    setStat("apikey-stat", "ok", "저장됨");
+  if(ls(C.SK.GHTOKEN))   setStat("gh-stat",     "ok", "저장됨");
+}
+
+function saveApiKey() {
+  const k = g("s-apikey").value.trim();
+  if(!k) { toast("API 키를 입력해주세요"); return; }
+  lss(C.SK.APIKEY, k);
+  setStat("apikey-stat", "ok", "저장됨");
+  toast("API 키 저장됐어요!");
+}
+
+function saveGithub() {
+  const fields = [
+    ["s-ghtoken", C.SK.GHTOKEN, true],
+    ["s-ghowner", C.SK.GHOWNER, true],
+    ["s-ghrepo",  C.SK.GHREPO,  true],
+    ["s-ghbranch",C.SK.GHBRANCH,false],
+    ["s-ghpath",  C.SK.GHPATH,  false],
+  ];
+  for(const [id, key, required] of fields) {
+    const v = g(id).value.trim();
+    if(!v && required) { toast(id + " 는 필수입니다"); return; }
+    lss(key, v || (id==="s-ghbranch"?"main":"index.html"));
   }
+  setStat("gh-stat", "ok", "저장됨");
+  toast("GitHub 설정 저장됐어요!");
 }
 
 async function testApiKey() {
-  const key = g("s-apikey").value.trim() || ls(CONFIG.SK.APIKEY);
-  if(!key) { toast("API 키를 입력해주세요"); return; }
-  setStatus("apikey-status", "ing", "테스트 중...");
+  const key = g("s-apikey").value.trim() || ls(C.SK.APIKEY);
+  if(!key) { toast("API 키를 입력하고 저장해주세요"); return; }
+  setStat("apikey-stat", "un", "테스트 중...");
   try {
-    await callClaude([{role:"user",content:"ping"}], "pong이라고만 답하세요.", key);
-    setStatus("apikey-status", "ok", "연결 성공");
+    await callAPI([{role:"user",content:"안녕"}], "안녕이라고만 짧게 답하세요.", key);
+    setStat("apikey-stat", "ok", "연결 성공 ✓");
     toast("API 키 정상 작동!");
   } catch(e) {
-    setStatus("apikey-status", "no", "연결 실패");
+    setStat("apikey-stat", "no", "연결 실패");
     toast("오류: " + e.message);
   }
 }
 
 async function testGithub() {
-  const token  = g("s-ghtoken").value.trim() || ls(CONFIG.SK.GHTOKEN);
-  const owner  = g("s-ghowner").value.trim() || ls(CONFIG.SK.GHOWNER);
-  const repo   = g("s-ghrepo").value.trim()  || ls(CONFIG.SK.GHREPO);
-  if(!token||!owner||!repo) { toast("Token, Username, Repo를 먼저 입력해주세요"); return; }
-  setStatus("gh-status", "ing", "테스트 중...");
+  const token = g("s-ghtoken").value.trim() || ls(C.SK.GHTOKEN);
+  const owner = g("s-ghowner").value.trim() || ls(C.SK.GHOWNER);
+  const repo  = g("s-ghrepo").value.trim()  || ls(C.SK.GHREPO);
+  if(!token||!owner||!repo) { toast("Token, Username, Repo를 먼저 입력하고 저장해주세요"); return; }
+  setStat("gh-stat", "un", "테스트 중...");
   try {
     const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
       headers: { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json" }
     });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    setStatus("gh-status", "ok", "연결 성공");
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    setStat("gh-stat", "ok", "연결 성공 ✓");
     toast("GitHub 레포 접근 성공!");
   } catch(e) {
-    setStatus("gh-status", "no", "연결 실패");
+    setStat("gh-stat", "no", "연결 실패");
     toast("오류: " + e.message);
   }
 }
 
-function setStatus(id, type, text) {
-  const el = g(id);
-  const cls = type==="ok"?"status-ok":type==="no"?"status-no":"status-un";
-  el.innerHTML = `<span class="status-dot ${cls}"></span><span style="font-size:10px;color:var(--muted)">${text}</span>`;
+function setStat(id, type, text) {
+  const cls = type === "ok" ? "ok" : type === "no" ? "no" : "un";
+  g(id).innerHTML = `<span class="sdot ${cls}"></span><span class="sstat">${text}</span>`;
 }
 
 function hardReset() {
-  Object.values(CONFIG.SK).forEach(k => localStorage.removeItem(k));
+  if(!confirm("정말 초기화할까요? 모든 데이터가 삭제됩니다.")) return;
+  Object.values(C.SK).forEach(k => localStorage.removeItem(k));
   location.reload();
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  GITHUB COMMIT (자가 업데이트 핵심)
-// ╚══════════════════════════════════════════════════
-async function commitToGitHub(newHtml) {
-  const token  = ls(CONFIG.SK.GHTOKEN);
-  const owner  = ls(CONFIG.SK.GHOWNER);
-  const repo   = ls(CONFIG.SK.GHREPO);
-  const branch = ls(CONFIG.SK.GHBRANCH) || "main";
-  const path   = ls(CONFIG.SK.GHPATH)   || "index.html";
+// ── GITHUB COMMIT ─────────────────────────────────
+async function commitToGitHub(html) {
+  const token  = ls(C.SK.GHTOKEN);
+  const owner  = ls(C.SK.GHOWNER);
+  const repo   = ls(C.SK.GHREPO);
+  const branch = ls(C.SK.GHBRANCH) || "main";
+  const path   = ls(C.SK.GHPATH)   || "index.html";
+  if(!token||!owner||!repo) throw new Error("GitHub 설정이 없습니다. ⚙ 설정 탭에서 입력해주세요.");
 
-  if(!token||!owner||!repo) throw new Error("GitHub 설정이 없습니다. ⚙ 설정 탭에서 먼저 입력해주세요.");
-
-  // 1. 현재 파일 SHA 가져오기
   const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`, {
     headers: { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json" }
   });
-  if(!getRes.ok) throw new Error(`파일 조회 실패 (${getRes.status}): 레포·경로를 확인해주세요`);
-  const fileData = await getRes.json();
-  const sha = fileData.sha;
+  if(!getRes.ok) throw new Error(`파일 조회 실패 (${getRes.status})`);
+  const { sha } = await getRes.json();
 
-  // 2. 커밋
   const now = new Date().toISOString().slice(0,16).replace("T"," ");
-  const content = btoa(unescape(encodeURIComponent(newHtml)));
+  const content = btoa(unescape(encodeURIComponent(html)));
   const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
     method: "PUT",
-    headers: {
-      Authorization: `token ${token}`,
-      Accept: "application/vnd.github.v3+json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      message: `AI Team auto-update ${now}`,
-      content,
-      sha,
-      branch,
-    }),
+    headers: { Authorization:`token ${token}`, Accept:"application/vnd.github.v3+json", "Content-Type":"application/json" },
+    body: JSON.stringify({ message:`AI Team auto-update ${now}`, content, sha, branch }),
   });
-  if(!putRes.ok) {
-    const err = await putRes.json();
-    throw new Error(err.message || `커밋 실패 (${putRes.status})`);
-  }
-  return await putRes.json();
+  if(!putRes.ok) { const e = await putRes.json(); throw new Error(e.message || `커밋 실패 (${putRes.status})`); }
+  return putRes.json();
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  CLAUDE API
-// ╚══════════════════════════════════════════════════
-async function callClaude(messages, system, apiKey) {
-  const key = apiKey || ls(CONFIG.SK.APIKEY);
+// ── CLAUDE API ────────────────────────────────────
+async function callAPI(messages, system, apiKey) {
+  const key = apiKey || ls(C.SK.APIKEY);
   if(!key) throw new Error("API 키가 없습니다. ⚙ 설정 탭에서 입력해주세요.");
-  const res = await fetch(CONFIG.API_URL, {
+  const res = await fetch(C.API_URL, {
     method: "POST",
     headers: { "Content-Type":"application/json", "x-api-key":key, "anthropic-version":"2023-06-01" },
-    body: JSON.stringify({ model:CONFIG.MODEL, max_tokens:CONFIG.MAX_TOKENS, system, messages }),
+    body: JSON.stringify({ model:C.MODEL, max_tokens:C.MAX_TOK, system, messages }),
   });
   const data = await res.json();
   if(data.error) throw new Error(data.error.message);
-  // 사용량 기록
   const u = data.usage || {};
   recordUsage(u.input_tokens||0, u.output_tokens||0);
   return data.content[0].text;
 }
 
-async function callClaudeSingle(system, userMsg) {
-  return callClaude([{role:"user",content:userMsg}], system);
+async function callSingle(system, userMsg) {
+  return callAPI([{role:"user", content:userMsg}], system);
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  DEV CHAT (Claude 채팅 + 자가 업데이트)
-// ╚══════════════════════════════════════════════════
-function loadDevChatHistory() {
+// ── DEV CHAT ──────────────────────────────────────
+function buildSysPrompt() {
+  const src = document.documentElement.outerHTML;
+  return `당신은 AI Team 앱에 내장된 Claude입니다.
+
+[역할]
+1. 한국어로 친근하게 일반 대화
+2. 앱 수정 요청 처리:
+   - 사용자가 앱 기능 추가/수정/디자인 변경을 요청하면
+   - 수정된 전체 HTML을 생성하고 반드시 아래 형식으로 감싸서 반환:
+   <<<DEPLOY_START>>>
+   (수정된 전체 index.html 내용 — DOCTYPE부터 </html>까지)
+   <<<DEPLOY_END>>>
+   - 배포 블록 밖에 설명도 함께 작성
+
+[규칙]
+- 앱 수정 시 반드시 전체 HTML 반환 (부분 수정 금지)
+- CONFIG(C 객체) 설정값 보존
+- localStorage 키(C.SK) 변경 금지
+- CHANGELOG 버전 업데이트
+
+[현재 소스]
+${src.slice(0, 80000)}`;
+}
+
+function initDevChat() {
   const chat = g("dev-chat");
   chat.innerHTML = "";
   if(!devHist.length) {
-    appendSys("안녕하세요! AI Team 앱 내장 Claude예요 😊\n\n일반 대화는 물론, 앱 수정도 요청하실 수 있어요.\n예: '다크모드 토글 추가해줘', '팀원 최대 8명으로 늘려줘', '사용량에 원화 환율 바꿔줘'\n\n수정 요청 시 → 코드 생성 → GitHub 자동 커밋 → Cloudflare 자동 배포됩니다.", "dev-chat");
+    appendSys("안녕하세요! AI Team 앱 내장 Claude예요 😊\n\n일반 대화는 물론, 앱 수정도 요청하실 수 있어요.\n예: '버튼 색깔 바꿔줘', '팀원 최대 8명으로 늘려줘'\n\n수정 요청 → 코드 생성 → GitHub 자동 커밋 → Cloudflare 자동 배포", "dev-chat");
     return;
   }
   devHist.slice(-40).forEach(h => {
-    if(h.role==="user") appendUserMsg(h.content, "dev-chat");
+    if(h.role === "user") appendUserMsg(h.content, "dev-chat");
     else appendAiMsg(h.content, "dev-chat");
   });
-  appendSys(`↑ 이전 대화 ${devHist.length}개 복원됨`, "dev-chat");
+  appendSys(`이전 대화 ${devHist.length}개 복원됨`, "dev-chat");
 }
 
 async function sendDev() {
@@ -701,47 +713,40 @@ async function sendDev() {
 
   appendUserMsg(msg, "dev-chat");
   devHist.push({role:"user", content:msg});
-  lss(CONFIG.SK.CHAT, JSON.stringify(devHist));
+  lss(C.SK.CHAT, JSON.stringify(devHist));
 
   devLoad = true;
   g("send-c").disabled = true;
   const ld = appendLoading("dev-chat");
 
   try {
-    // 슬라이딩 윈도우
-    const window_ = devHist.slice(-CONFIG.ASSISTANT_WINDOW);
-    const messages = window_.map(h => ({role:h.role, content:h.content}));
-    const system   = buildSystemPrompt();
-
-    const resp = await callClaude(messages, system);
+    const msgs = devHist.slice(-C.WIN).map(h => ({role:h.role, content:h.content}));
+    const resp = await callAPI(msgs, buildSysPrompt());
     ld.remove();
 
-    // 배포 블록 감지
-    const deployMatch = resp.match(/<<<DEPLOY_START>>>([\s\S]*?)<<<DEPLOY_END>>>/);
-    if(deployMatch) {
-      const newHtml = deployMatch[1].trim();
+    const dm = resp.match(/<<<DEPLOY_START>>>([\s\S]*?)<<<DEPLOY_END>>>/);
+    if(dm) {
+      const newHtml  = dm[1].trim();
       const textPart = resp.replace(/<<<DEPLOY_START>>>[\s\S]*?<<<DEPLOY_END>>>/, "").trim();
-
       if(textPart) appendAiMsg(textPart, "dev-chat");
-      appendDeployBar("ing", "GitHub에 커밋 중...", "dev-chat");
-
+      const bar = appendDeployBar("ing", "⏳ GitHub에 커밋 중...", "dev-chat");
       try {
         await commitToGitHub(newHtml);
-        replaceLastDeployBar("ok", "✅ GitHub 커밋 완료! Cloudflare Pages 배포 중... (약 1~2분 후 반영)", "dev-chat");
-        // 로컬도 즉시 업데이트
+        bar.className = "deploy-bar ok";
+        bar.textContent = "✅ 커밋 완료! Cloudflare Pages 배포 중... (약 1~2분 후 반영)";
         setTimeout(() => {
           if(confirm("배포가 완료됐어요! 페이지를 새로고침할까요?")) location.reload();
-        }, 2000);
+        }, 3000);
       } catch(e) {
-        replaceLastDeployBar("err", `❌ 커밋 실패: ${e.message}`, "dev-chat");
+        bar.className = "deploy-bar err";
+        bar.textContent = "❌ 커밋 실패: " + e.message;
       }
     } else {
       appendAiMsg(resp, "dev-chat");
     }
 
     devHist.push({role:"assistant", content:resp});
-    lss(CONFIG.SK.CHAT, JSON.stringify(devHist));
-
+    lss(C.SK.CHAT, JSON.stringify(devHist));
   } catch(e) {
     ld.remove();
     appendSys("오류: " + e.message, "dev-chat");
@@ -749,26 +754,23 @@ async function sendDev() {
 
   devLoad = false;
   g("send-c").disabled = false;
-  scrollBottom("dev-chat");
+  scrollBot("dev-chat");
 }
 
 function clearDevChat() {
   if(!confirm("대화를 초기화할까요?")) return;
   devHist = [];
-  lss(CONFIG.SK.CHAT, "[]");
-  loadDevChatHistory();
+  lss(C.SK.CHAT, "[]");
+  initDevChat();
 }
 
 function exportDevChat() {
   if(!devHist.length) { toast("내보낼 대화가 없어요"); return; }
-  const text = devHist.map(h => `[${h.role==="user"?"나":"Claude"}]\n${h.content}`).join("\n\n---\n\n");
-  copyText(text);
+  copyText(devHist.map(h => `[${h.role==="user"?"나":"Claude"}]\n${h.content}`).join("\n\n---\n\n"));
   toast("클립보드에 복사됐어요!");
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  DISCUSSION
-// ╚══════════════════════════════════════════════════
+// ── DISCUSSION ────────────────────────────────────
 const STANCE = {
   agree:    ["✓","동의","st-agree"],
   disagree: ["✗","반론","st-disagree"],
@@ -777,17 +779,15 @@ const STANCE = {
   neutral:  ["—","의견","st-neutral"],
 };
 
-let discHistory = [];
-
 async function sendDisc() {
-  const inp = g("d-inp");
+  const inp   = g("d-inp");
   const topic = inp.value.trim();
   if(!topic || discLoad) return;
   g("welcome")?.remove();
   inp.value = ""; inp.style.height = "auto";
 
   appendUserMsg(topic, "disc-chat");
-  discHistory.push({role:"user", content:topic});
+  discHist.push({role:"user", content:topic});
   exportLog.push(`\n[사용자] ${topic}\n`);
 
   discLoad = true;
@@ -795,303 +795,251 @@ async function sendDisc() {
   const ld = appendLoading("disc-chat");
 
   try {
-    const ctx      = discHistory.slice(-6).map(h=>`[${h.role==="user"?"사용자":"이전"}]: ${h.content.slice(0,150)}`).join("\n");
-    const teamDesc = members.map(m=>`${m.name}(${m.persona.slice(0,35)}...)`).join(", ");
+    const ctx  = discHist.slice(-6).map(h => `[${h.role==="user"?"사용자":"이전"}]: ${h.content.slice(0,150)}`).join("\n");
+    const tdsc = members.map(m => `${m.name}(${m.persona.slice(0,35)}...)`).join(", ");
 
     // Round 1 — 병렬
-    const r1 = await Promise.all(members.map(m => runAgent(m, topic, ctx, teamDesc, null, 1)));
+    const r1 = await Promise.all(members.map(m => runAgent(m, topic, ctx, tdsc, null, 1)));
 
     // Round 2 — 병렬
     let r2 = [];
-    if(CONFIG.ENABLE_ROUND2) {
-      const r1txt = r1.map(r=>`${r.name}: ${r.content}`).join("\n");
-      r2 = await Promise.all(members.map(m => runAgent(m, topic, ctx, teamDesc, r1txt, 2)));
+    if(C.R2) {
+      const r1txt = r1.map(r => `${r.name}: ${r.content}`).join("\n");
+      r2 = await Promise.all(members.map(m => runAgent(m, topic, ctx, tdsc, r1txt, 2)));
     }
 
-    // Moderator
-    const allOps = [...r1,...r2].map(r=>`[${r.name}]: ${r.content}`).join("\n\n");
+    // 진행자 요약
+    const allOps = [...r1,...r2].map(r => `[${r.name}]: ${r.content}`).join("\n\n");
     let modTxt = "";
     try {
-      modTxt = await callClaudeSingle(
+      modTxt = await callSingle(
         "중립적인 토론 진행자. 팀원 전체 토론을 2~3문장으로 핵심 요약하고, 앞으로 생각해볼 점 1가지 제시. 간결하고 통찰 있게.",
         `주제: ${topic}\n\n팀원 의견:\n${allOps}`
       );
-    } catch(e) { modTxt = `[요약 오류: ${e.message}]`; }
-
-    const mod = {name:"진행자 요약",emoji:"📋",color:"#b0b0c8",stance:"neutral",content:modTxt,round:0,is_mod:true};
-    const results = [...r1, ...r2, mod];
+    } catch(e) { modTxt = "[요약 오류: " + e.message + "]"; }
 
     ld.remove();
-    renderDisc(results, topic);
+    renderDisc([...r1, ...r2, {name:"진행자 요약",emoji:"📋",color:"#b0b0c8",stance:"neutral",content:modTxt,round:0,is_mod:true}], topic);
 
-    const log = results.filter(r=>!r.is_mod).map(r=>`[${r.name}·R${r.round}] ${r.content}`).join("\n");
-    discHistory.push({role:"assistant", content:log});
-    exportLog.push(log + (modTxt?`\n[진행자] ${modTxt}`:"")+"\n");
-
+    const log = [...r1,...r2].map(r => `[${r.name}·R${r.round}] ${r.content}`).join("\n");
+    discHist.push({role:"assistant", content:log});
+    exportLog.push(log + "\n[진행자] " + modTxt + "\n");
   } catch(e) {
     ld.remove();
-    appendSys("오류: "+e.message, "disc-chat");
+    appendSys("오류: " + e.message, "disc-chat");
   }
 
   discLoad = false;
   g("send-d").disabled = false;
-  scrollBottom("disc-chat");
+  scrollBot("disc-chat");
 }
 
-async function runAgent(member, topic, ctx, teamDesc, prev, rnd) {
+async function runAgent(m, topic, ctx, tdsc, prev, rnd) {
   const r2x = prev ? `\n\n1라운드 팀원 의견:\n${prev}\n\n위 의견에 반응하세요. 동의/반박/새 관점. 팀원 이름 직접 언급 가능.` : "";
-  const sys = `당신은 ${member.name}입니다. 성격: ${member.persona}\n\n팀: ${teamDesc}\n이전 대화: ${ctx||"없음"}${r2x}\n\n규칙:\n- ${rnd===2?"2~4":"3~5"}문장으로 당신만의 관점 표현\n- 당신의 성격에 맞는 말투 유지\n- 반드시 JSON으로만 응답:\n{"stance":"agree|disagree|new|question|neutral","content":"의견"}`;
-  const raw = await callClaudeSingle(sys, `주제: ${topic}`);
+  const sys = `당신은 ${m.name}입니다. 성격: ${m.persona}\n\n팀: ${tdsc}\n이전 대화: ${ctx||"없음"}${r2x}\n\n규칙:\n- ${rnd===2?"2~4":"3~5"}문장으로 당신만의 관점 표현\n- 당신의 성격에 맞는 말투 유지\n- 반드시 JSON으로만 응답:\n{"stance":"agree|disagree|new|question|neutral","content":"의견"}`;
+  const raw = await callSingle(sys, "주제: " + topic);
   let p;
   try { p = JSON.parse(raw.replace(/```json|```/g,"").trim()); }
-  catch { p = {stance:"neutral",content:raw}; }
-  return {...member, stance:p.stance||"neutral", content:p.content||raw, round:rnd, is_mod:false};
+  catch { p = {stance:"neutral", content:raw}; }
+  return {...m, stance:p.stance||"neutral", content:p.content||raw, round:rnd, is_mod:false};
 }
 
 function renderDisc(results, topic) {
-  const chat = g("disc-chat");
+  const chat  = g("disc-chat");
   const block = document.createElement("div");
-  const lbl = document.createElement("div");
-  lbl.className="tlbl"; lbl.textContent=`— ${topic.slice(0,38)}${topic.length>38?"…":""} —`;
+  const lbl   = document.createElement("div");
+  lbl.className = "tlbl";
+  lbl.textContent = `— ${topic.slice(0,38)}${topic.length>38?"…":""} —`;
   block.appendChild(lbl);
+
   let curRound = 0;
   results.forEach(r => {
     if(r.is_mod) {
-      const el=document.createElement("div"); el.className="modbl";
-      el.innerHTML=`<div class="modlbl">📋 종합 요약</div>${esc(r.content)}`;
+      const el = document.createElement("div");
+      el.className = "modbl";
+      el.innerHTML = `<div class="modlbl">📋 종합 요약</div>${esc(r.content)}`;
       block.appendChild(el);
     } else {
-      if(r.round!==curRound){ curRound=r.round; if(curRound>1){const rl=document.createElement("div");rl.className="rlbl";rl.textContent=`ROUND ${curRound} · 반응`;block.appendChild(rl);} }
-      const [sym,label,cls] = STANCE[r.stance]||STANCE.neutral;
-      const el=document.createElement("div"); el.className="ar";
-      el.innerHTML=`<div class="av" style="border-color:${r.color};background:${r.color}18">${r.emoji}</div><div class="ab"><div class="anm" style="color:${r.color}">${esc(r.name)}</div><div class="abl"><span class="stag ${cls}">${sym} ${label}</span><div>${esc(r.content)}</div></div></div>`;
+      if(r.round !== curRound) {
+        curRound = r.round;
+        if(curRound > 1) {
+          const rl = document.createElement("div");
+          rl.className = "rlbl";
+          rl.textContent = `ROUND ${curRound} · 반응`;
+          block.appendChild(rl);
+        }
+      }
+      const [sym, label, cls] = STANCE[r.stance] || STANCE.neutral;
+      const el = document.createElement("div");
+      el.className = "ar";
+      el.innerHTML = `<div class="av" style="border-color:${r.color};background:${r.color}18">${r.emoji}</div><div class="ab"><div class="anm" style="color:${r.color}">${esc(r.name)}</div><div class="abl"><span class="stag ${cls}">${sym} ${label}</span><div>${esc(r.content)}</div></div></div>`;
       block.appendChild(el);
     }
   });
   chat.appendChild(block);
-  scrollBottom("disc-chat");
+  scrollBot("disc-chat");
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  USAGE
-// ╚══════════════════════════════════════════════════
-function loadUsage() {
-  return JSON.parse(ls(CONFIG.SK.USAGE)||'{"total":{"input":0,"output":0,"calls":0},"daily":{}}');
-}
-function saveUsage(data) { lss(CONFIG.SK.USAGE, JSON.stringify(data)); }
+// ── USAGE ─────────────────────────────────────────
+function loadUsage() { return JSON.parse(ls(C.SK.USAGE)||'{"total":{"input":0,"output":0,"calls":0},"daily":{}}'); }
+function saveUsage(d) { lss(C.SK.USAGE, JSON.stringify(d)); }
 function recordUsage(inp, out) {
-  const data = loadUsage();
-  const today = new Date().toISOString().slice(0,10);
-  data.total.input  += inp; data.total.output += out; data.total.calls++;
-  if(!data.daily[today]) data.daily[today] = {input:0,output:0,calls:0};
-  data.daily[today].input+=inp; data.daily[today].output+=out; data.daily[today].calls++;
-  saveUsage(data);
+  const d = loadUsage(), today = new Date().toISOString().slice(0,10);
+  d.total.input+=inp; d.total.output+=out; d.total.calls++;
+  if(!d.daily[today]) d.daily[today]={input:0,output:0,calls:0};
+  d.daily[today].input+=inp; d.daily[today].output+=out; d.daily[today].calls++;
+  saveUsage(d);
 }
 function resetUsage() { saveUsage({total:{input:0,output:0,calls:0},daily:{}}); renderUsage(); toast("초기화됐어요"); }
-function cost(i,o) { return (i/1e6*CONFIG.PRICE_INPUT + o/1e6*CONFIG.PRICE_OUTPUT); }
-function fmtN(n) { return n>=1e6?(n/1e6).toFixed(2)+"M":n>=1000?(n/1000).toFixed(1)+"K":String(n); }
-function fmtC(c) { return `$${c.toFixed(4)}`; }
-function fmtKRW(c) { return `₩${Math.round(c*CONFIG.KRW_RATE).toLocaleString()}`; }
-
+function ucost(i,o) { return i/1e6*C.P_IN + o/1e6*C.P_OUT; }
+function fn(n) { return n>=1e6?(n/1e6).toFixed(2)+"M":n>=1000?(n/1000).toFixed(1)+"K":String(n); }
+function fc(c) { return "$"+c.toFixed(4); }
+function fk(c) { return "₩"+Math.round(c*C.KRW).toLocaleString(); }
 function renderUsage() {
-  const data = loadUsage();
-  const today = new Date().toISOString().slice(0,10);
-  const td = data.daily[today]||{input:0,output:0,calls:0};
-
-  function cards(id, inp, out, calls) {
-    const c = cost(inp,out);
-    g(id).innerHTML=`
-      <div class="uc"><div class="uc-lbl">TOTAL TOKENS</div><div class="uc-val">${fmtN(inp+out)}</div><div class="uc-sub">입력 ${fmtN(inp)} · 출력 ${fmtN(out)}</div></div>
-      <div class="uc"><div class="uc-lbl">API CALLS</div><div class="uc-val">${calls}</div><div class="uc-sub">호출 횟수</div></div>
-      <div class="uc hi"><div class="uc-lbl">COST</div><div class="uc-val">${fmtC(c)}</div><div class="uc-sub">${fmtKRW(c)}</div></div>`;
+  const d = loadUsage(), today = new Date().toISOString().slice(0,10);
+  const td = d.daily[today]||{input:0,output:0,calls:0};
+  function cards(id, i, o, calls) {
+    const c = ucost(i,o);
+    g(id).innerHTML = `<div class="uc"><div class="uc-lbl">TOTAL TOKENS</div><div class="uc-val">${fn(i+o)}</div><div class="uc-sub">입력 ${fn(i)} · 출력 ${fn(o)}</div></div><div class="uc"><div class="uc-lbl">API CALLS</div><div class="uc-val">${calls}</div><div class="uc-sub">호출 횟수</div></div><div class="uc hi"><div class="uc-lbl">COST</div><div class="uc-val">${fc(c)}</div><div class="uc-sub">${fk(c)}</div></div>`;
   }
-  cards("u-total", data.total.input, data.total.output, data.total.calls);
+  cards("u-total", d.total.input, d.total.output, d.total.calls);
   cards("u-today", td.input, td.output, td.calls);
-
-  const tbody = g("u-daily"); tbody.innerHTML="";
-  Object.entries(data.daily).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7).forEach(([date,d])=>{
-    const c=cost(d.input,d.output);
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${date}</td><td>${fmtN(d.input)}</td><td>${fmtN(d.output)}</td><td>${d.calls}</td><td>${fmtC(c)}</td><td>${fmtKRW(c)}</td>`;
-    tbody.appendChild(tr);
+  const tb = g("u-daily"); tb.innerHTML = "";
+  Object.entries(d.daily).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7).forEach(([date,dd])=>{
+    const c = ucost(dd.input,dd.output);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${date}</td><td>${fn(dd.input)}</td><td>${fn(dd.output)}</td><td>${dd.calls}</td><td>${fc(c)}</td><td>${fk(c)}</td>`;
+    tb.appendChild(tr);
   });
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  PANEL / TEAM
-// ╚══════════════════════════════════════════════════
-function togglePanel() {
-  panelOpen=!panelOpen;
-  g("panel").classList.toggle("hide",!panelOpen);
-  g("panel-btn").classList.toggle("on",panelOpen);
-  g("panel-btn").textContent = panelOpen?"✕ 닫기":"👥 팀 설정";
-}
-
-function switchTab(key, btn) {
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
-  if(btn) btn.classList.add("on");
-  document.querySelectorAll(".ctab").forEach(t=>t.classList.remove("on"));
-  g(`t-${key}`).classList.add("on");
-  if(key!=="disc" && panelOpen) togglePanel();
-  if(key==="usage") renderUsage();
-  g("panel-btn").style.display = key==="disc"?"":"none";
-}
-
-function switchPTab(key, btn) {
-  document.querySelectorAll(".ptab").forEach(b=>b.classList.remove("on"));
-  document.querySelectorAll(".pbody").forEach(b=>b.classList.remove("on"));
-  btn.classList.add("on");
-  g(`pb-${key}`).classList.add("on");
-  if(key==="saved") renderSavedList();
-}
-
+// ── PANEL / TEAM ──────────────────────────────────
 function renderPresets() {
-  const grid = g("preset-grid"); grid.innerHTML="";
-  CONFIG.PRESETS.forEach(p=>{
-    const el=document.createElement("div"); el.className="pc";
-    el.innerHTML=`<div class="pc-em">${p.emoji}</div><div class="pc-nm">${p.name}</div><div class="pc-ds">${p.desc}</div>`;
-    el.onclick=()=>{ document.querySelectorAll(".pc").forEach(c=>c.classList.remove("on")); el.classList.add("on"); members=cloneDeep(p.members); renderEditor(); };
+  const grid = g("preset-grid"); grid.innerHTML = "";
+  C.PRESETS.forEach(p => {
+    const el = document.createElement("div"); el.className = "pc";
+    el.innerHTML = `<div class="pc-em">${p.emoji}</div><div class="pc-nm">${p.name}</div><div class="pc-ds">${p.desc}</div>`;
+    el.onclick = () => { document.querySelectorAll(".pc").forEach(c=>c.classList.remove("on")); el.classList.add("on"); members=cd(p.members); renderEditor(); };
     grid.appendChild(el);
   });
 }
 
 function renderEditor() {
-  const ed=g("meditor"); ed.innerHTML="";
-  members.forEach((m,i)=>{
-    const row=document.createElement("div"); row.className="mrow";
-    row.innerHTML=`
-      <div class="mrow-top">
-        <button class="em-btn" onclick="pickEmoji(${i},this)">${m.emoji}</button>
-        <input class="nm-inp" value="${esc(m.name)}" oninput="members[${i}].name=this.value"/>
-        <button class="rm" onclick="removeMember(${i})">✕</button>
-      </div>
-      <textarea class="per-inp" rows="2" onchange="members[${i}].persona=this.value">${esc(m.persona)}</textarea>
-      <div class="cdots">${CONFIG.COLORS.map(c=>`<div class="cd${m.color===c?" on":""}" style="background:${c}" onclick="setColor(${i},'${c}',this)"></div>`).join("")}</div>`;
+  const ed = g("meditor"); ed.innerHTML = "";
+  members.forEach((m, i) => {
+    const row = document.createElement("div"); row.className = "mrow";
+    row.innerHTML = `<div class="mrow-top"><button class="em-btn" onclick="pickEmoji(${i},this)">${m.emoji}</button><input class="nm-inp" value="${esc(m.name)}" oninput="members[${i}].name=this.value"/><button class="rm" onclick="removeMember(${i})">✕</button></div><textarea class="per-inp" rows="2" onchange="members[${i}].persona=this.value">${esc(m.persona)}</textarea><div class="cdots">${C.COLORS.map(c=>`<div class="cd${m.color===c?" on":""}" style="background:${c}" onclick="setColor(${i},'${c}',this)"></div>`).join("")}</div>`;
     ed.appendChild(row);
   });
 }
 
-function setColor(idx,color,dot){ members[idx].color=color; dot.closest(".cdots").querySelectorAll(".cd").forEach(d=>d.classList.remove("on")); dot.classList.add("on"); }
-function removeMember(idx){ if(members.length<=2){toast("최소 2명 필요합니다");return;} members.splice(idx,1); renderEditor(); }
-function addMember(){ if(members.length>=CONFIG.MAX_TEAM_SIZE){toast("최대 "+CONFIG.MAX_TEAM_SIZE+"명");return;} members.push({id:"u"+Date.now(),emoji:"🤖",name:"새 팀원",color:CONFIG.COLORS[members.length%CONFIG.COLORS.length],persona:"이 팀원의 성격과 역할을 입력하세요."}); renderEditor(); }
-function applyTeam(){ renderBadges(); renderWelcome(); g("disc-chat").innerHTML=""; const w=document.createElement("div");w.className="welcome";w.id="welcome";w.innerHTML='<h2>팀 적용됐어요!</h2><p>주제를 던져보세요.</p><div class="wgrid" id="wgrid"></div>';g("disc-chat").appendChild(w);renderWelcome();togglePanel();switchTab("disc",document.querySelector(".tab"));toast("팀 적용됐어요!"); }
-function resetTeam(){ members=cloneDeep(CONFIG.DEFAULT_MEMBERS); renderEditor(); document.querySelectorAll(".pc").forEach(c=>c.classList.remove("on")); toast("기본 팀으로 초기화"); }
-
-function saveTeam(){
-  const name=g("sv-name").value.trim(); if(!name){toast("팀 이름을 입력해주세요");return;}
-  const teams=JSON.parse(ls(CONFIG.SK.TEAMS)||"[]");
-  if(teams.length>=CONFIG.MAX_SAVED){toast("최대 "+CONFIG.MAX_SAVED+"개");return;}
-  teams.push({id:"sv"+Date.now(),name,members:cloneDeep(members),saved_at:new Date().toLocaleString("ko-KR",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})});
-  lss(CONFIG.SK.TEAMS,JSON.stringify(teams)); g("sv-name").value=""; toast(`"${name}" 저장됐어요!`);
+function setColor(i, col, dot) {
+  members[i].color = col;
+  dot.closest(".cdots").querySelectorAll(".cd").forEach(d=>d.classList.remove("on"));
+  dot.classList.add("on");
 }
-function renderSavedList(){
-  const list=g("saved-list"); list.innerHTML="";
-  const teams=JSON.parse(ls(CONFIG.SK.TEAMS)||"[]");
+function removeMember(i) { if(members.length<=2){toast("최소 2명 필요합니다");return;} members.splice(i,1); renderEditor(); }
+function addMember() {
+  if(members.length>=C.MAX_TEAM){toast("최대 "+C.MAX_TEAM+"명");return;}
+  members.push({id:"u"+Date.now(),emoji:"🤖",name:"새 팀원",color:C.COLORS[members.length%C.COLORS.length],persona:"이 팀원의 성격과 역할을 입력하세요."});
+  renderEditor();
+}
+function applyTeam() {
+  renderBadges(); renderWelcome();
+  g("disc-chat").innerHTML="";
+  const w=document.createElement("div");w.className="welcome";w.id="welcome";
+  w.innerHTML='<h2>팀 적용됐어요!</h2><p>주제를 던져보세요.</p><div class="wgrid" id="wgrid"></div>';
+  g("disc-chat").appendChild(w); renderWelcome();
+  if(panelOpen) togglePanel();
+  switchTab("disc", document.querySelector(".tab"));
+  toast("팀 적용됐어요!");
+}
+function resetTeam() { members=cd(C.DEF); renderEditor(); document.querySelectorAll(".pc").forEach(c=>c.classList.remove("on")); toast("기본 팀으로 초기화"); }
+function renderBadges() {
+  const bar = g("badges"); bar.innerHTML = "";
+  members.forEach(m => { const b=document.createElement("span");b.className="bdg";b.style.cssText=`color:${m.color};border-color:${m.color};background:${m.color}18`;b.textContent=`${m.emoji} ${m.name}`;bar.appendChild(b); });
+}
+function renderWelcome() {
+  const grid = g("wgrid"); if(!grid) return; grid.innerHTML="";
+  members.forEach(m => { const c=document.createElement("div");c.className="wcard";c.style.borderColor=m.color+"44";c.innerHTML=`<div class="wnm" style="color:${m.color}">${m.emoji} ${esc(m.name)}</div><div class="wds">${esc(m.persona.slice(0,55))}...</div>`;grid.appendChild(c); });
+}
+
+function saveTeam() {
+  const name = g("sv-name").value.trim();
+  if(!name){toast("팀 이름을 입력해주세요");return;}
+  const teams = JSON.parse(ls(C.SK.TEAMS)||"[]");
+  if(teams.length>=C.MAX_SAVE){toast("최대 "+C.MAX_SAVE+"개");return;}
+  teams.push({id:"sv"+Date.now(),name,members:cd(members),saved_at:new Date().toLocaleString("ko-KR",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})});
+  lss(C.SK.TEAMS, JSON.stringify(teams)); g("sv-name").value=""; toast(`"${name}" 저장됐어요!`);
+}
+function renderSavedList() {
+  const list = g("saved-list"); list.innerHTML="";
+  const teams = JSON.parse(ls(C.SK.TEAMS)||"[]");
   if(!teams.length){list.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">저장된 팀이 없어요.</div>';return;}
-  teams.forEach(t=>{
-    const el=document.createElement("div"); el.className="si";
+  teams.forEach(t => {
+    const el=document.createElement("div");el.className="si";
     el.innerHTML=`<div class="si-inf"><div class="si-nm">${esc(t.name)}</div><div class="si-ms">${t.members.map(m=>m.emoji+" "+m.name).join(" · ")}</div></div><div class="si-dt">${t.saved_at||""}</div><button class="si-dl" onclick="event.stopPropagation();deleteTeam('${t.id}')">✕</button>`;
-    el.querySelector(".si-inf").onclick=()=>{ members=cloneDeep(t.members); renderEditor(); switchPTab("edit",document.querySelector(".ptab")); toast(`"${t.name}" 불러왔어요`); };
+    el.querySelector(".si-inf").onclick=()=>{members=cd(t.members);renderEditor();switchPTab("edit",document.querySelector(".ptab"));toast(`"${t.name}" 불러왔어요`);};
     list.appendChild(el);
   });
 }
-function deleteTeam(id){ const teams=JSON.parse(ls(CONFIG.SK.TEAMS)||"[]").filter(t=>t.id!==id); lss(CONFIG.SK.TEAMS,JSON.stringify(teams)); renderSavedList(); toast("삭제됐어요"); }
+function deleteTeam(id) { lss(C.SK.TEAMS,JSON.stringify(JSON.parse(ls(C.SK.TEAMS)||"[]").filter(t=>t.id!==id))); renderSavedList(); toast("삭제됐어요"); }
 
-function renderBadges(){
-  const bar=g("badges"); bar.innerHTML="";
-  members.forEach(m=>{ const b=document.createElement("span");b.className="bdg";b.style.cssText=`color:${m.color};border-color:${m.color};background:${m.color}18`;b.textContent=`${m.emoji} ${m.name}`;bar.appendChild(b); });
-}
-function renderWelcome(){
-  const grid=g("wgrid"); if(!grid) return; grid.innerHTML="";
-  members.forEach(m=>{ const c=document.createElement("div");c.className="wcard";c.style.borderColor=m.color+"44";c.innerHTML=`<div class="wnm" style="color:${m.color}">${m.emoji} ${esc(m.name)}</div><div class="wds">${esc(m.persona.slice(0,55))}...</div>`;grid.appendChild(c); });
-}
-
-// ╔══════════════════════════════════════════════════
-// ║  AI HELPER
-// ╚══════════════════════════════════════════════════
-async function sendHelper(){
-  const inp=g("h-inp"); const txt=inp.value.trim(); if(!txt)return; inp.value="";
+// ── AI HELPER ─────────────────────────────────────
+async function sendHelper() {
+  const inp=g("h-inp"),txt=inp.value.trim();if(!txt)return;inp.value="";
   addHMsg(txt,true); const ld=addHMsg("생각 중...",false);
-  try{
-    const colors=CONFIG.COLORS.join(" ");
-    const sys=`당신은 AI 팀 구성 전문가입니다. 현재 팀원:\n${members.map(m=>m.name+": "+m.persona).join("\n")}\n\n응답 규칙:\n- 3~5문장으로 친근하고 구체적으로 답변\n- 새 팀원 구성 제안 시 JSON 블록 포함:\n\`\`\`json\n{"members":[{"name":"이름","emoji":"이모지","color":"#hex","persona":"역할"}]}\n\`\`\`\n- 색상은 이 중에서: ${colors}`;
-    const resp=await callClaudeSingle(sys,txt);
+  try {
+    const sys=`당신은 AI 팀 구성 전문가입니다. 현재 팀원:\n${members.map(m=>m.name+": "+m.persona).join("\n")}\n\n응답 규칙:\n- 3~5문장으로 친근하고 구체적으로 답변\n- 새 팀원 구성 제안 시 JSON 블록 포함:\n\`\`\`json\n{"members":[{"name":"이름","emoji":"이모지","color":"#hex","persona":"역할"}]}\n\`\`\`\n- 색상: ${C.COLORS.join(" ")}`;
+    const resp=await callSingle(sys,txt);
     ld.remove();
     const jm=resp.match(/```json\n?([\s\S]*?)```/);
-    if(jm){
-      try{
-        const parsed=JSON.parse(jm[1]);
-        if(parsed.members){
-          const textPart=resp.replace(/```json[\s\S]*?```/,"").trim();
-          const m=addHMsg(textPart||"팀 구성 제안입니다!",false);
-          const btn=document.createElement("button"); btn.style.cssText="margin-top:4px;background:var(--acc);color:#fff;border:none;border-radius:6px;padding:3px 9px;cursor:pointer;font-size:10px;font-family:inherit;";
-          btn.textContent="이 팀 적용";
-          btn.onclick=()=>{ members=parsed.members.map((mm,i)=>({id:"h"+i,emoji:mm.emoji||"🤖",name:mm.name||"팀원",color:mm.color||CONFIG.COLORS[i%CONFIG.COLORS.length],persona:mm.persona||""})); renderEditor(); addHMsg("✓ 적용됐어요. 팀 적용 버튼을 눌러주세요!",false); };
-          m.appendChild(btn); return;
-        }
-      }catch(e){}
-    }
+    if(jm){try{const p=JSON.parse(jm[1]);if(p.members){const textPart=resp.replace(/```json[\s\S]*?```/,"").trim();const m=addHMsg(textPart||"팀 구성 제안입니다!",false);const btn=document.createElement("button");btn.style.cssText="margin-top:4px;background:var(--acc);color:#fff;border:none;border-radius:6px;padding:3px 9px;cursor:pointer;font-size:10px;font-family:inherit;";btn.textContent="이 팀 적용";btn.onclick=()=>{members=p.members.map((mm,i)=>({id:"h"+i,emoji:mm.emoji||"🤖",name:mm.name||"팀원",color:mm.color||C.COLORS[i%C.COLORS.length],persona:mm.persona||""}));renderEditor();addHMsg("✓ 적용됐어요!",false);};m.appendChild(btn);return;}}catch(e){}}
     addHMsg(resp,false);
-  }catch(e){ ld.remove(); addHMsg("오류: "+e.message,false); }
+  }catch(e){ld.remove();addHMsg("오류: "+e.message,false);}
 }
-function addHMsg(text,isUser){ const msgs=g("hmsgs"); const el=document.createElement("div"); el.className="hmsg"+(isUser?" u":""); el.textContent=text; msgs.appendChild(el); msgs.scrollTop=9999; return el; }
+function addHMsg(text,isUser){const msgs=g("hmsgs");const el=document.createElement("div");el.className="hmsg"+(isUser?" u":"");el.textContent=text;msgs.appendChild(el);msgs.scrollTop=9999;return el;}
 
-// ╔══════════════════════════════════════════════════
-// ║  VOICE
-// ╚══════════════════════════════════════════════════
-function initVoice(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+// ── VOICE ─────────────────────────────────────────
+function initVoice() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SR) return;
-  recog=new SR(); recog.lang="ko-KR"; recog.continuous=false; recog.interimResults=true;
-  recog.onresult=e=>{ const t=Array.from(e.results).map(r=>r[0].transcript).join(""); const el=g(micTarget==="d"?"d-inp":"c-inp"); el.value=t; el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,105)+"px"; };
-  recog.onend=()=>{ g("mic-d").classList.remove("rec"); g("mic-c").classList.remove("rec"); micTarget=null; };
-  recog.onerror=e=>{ toast("마이크 오류: "+e.error); g("mic-d").classList.remove("rec"); g("mic-c").classList.remove("rec"); micTarget=null; };
+  recog = new SR(); recog.lang="ko-KR"; recog.continuous=false; recog.interimResults=true;
+  recog.onresult = e => {
+    const t = Array.from(e.results).map(r=>r[0].transcript).join("");
+    const el = g(micTarget==="d"?"d-inp":"c-inp");
+    el.value=t; el.style.height="auto"; el.style.height=Math.min(el.scrollHeight,105)+"px";
+  };
+  recog.onend = () => { g("mic-d").classList.remove("rec"); g("mic-c").classList.remove("rec"); micTarget=null; };
+  recog.onerror = e => { toast("마이크 오류: "+e.error); g("mic-d").classList.remove("rec"); g("mic-c").classList.remove("rec"); micTarget=null; };
 }
-function toggleMic(t){
+function toggleMic(t) {
   if(!recog){toast("Chrome 또는 Safari에서 지원됩니다");return;}
-  const btn=g(t==="d"?"mic-d":"mic-c");
+  const btn = g(t==="d"?"mic-d":"mic-c");
   if(micTarget){recog.stop();btn.classList.remove("rec");micTarget=null;}
   else{micTarget=t;btn.classList.add("rec");recog.start();toast("🎤 말씀하세요...");}
 }
 
-// ╔══════════════════════════════════════════════════
-// ║  RENDER HELPERS
-// ╚══════════════════════════════════════════════════
-function appendUserMsg(text,chatId){ const chat=g(chatId); const el=document.createElement("div"); el.className="mu"; el.innerHTML=`<div class="bu">${esc(text)}</div>`; chat.appendChild(el); scrollBottom(chatId); }
-function appendAiMsg(text,chatId){ const chat=g(chatId); const el=document.createElement("div"); el.className="cai"; el.innerHTML=`<div style="font-size:18px;flex-shrink:0;padding-top:2px">🤖</div><div class="caibl">${escNl(text)}</div>`; chat.appendChild(el); scrollBottom(chatId); }
-function appendSys(text,chatId){ const chat=g(chatId); const el=document.createElement("div"); el.className="sysmsg"; el.textContent=text; chat.appendChild(el); scrollBottom(chatId); }
-function appendLoading(chatId){ const chat=g(chatId); const el=document.createElement("div"); el.className="ld"; el.innerHTML='<div class="dots"><span></span><span></span><span></span></div><div class="ldtxt">생각 중...</div>'; chat.appendChild(el); scrollBottom(chatId); return el; }
-function appendDeployBar(type,text,chatId){ const chat=g(chatId); const el=document.createElement("div"); el.className=`deploy-bar ${type}`; el.dataset.deploy="1"; el.textContent=text; chat.appendChild(el); scrollBottom(chatId); }
-function replaceLastDeployBar(type,text,chatId){ const chat=g(chatId); const bars=[...chat.querySelectorAll("[data-deploy]")]; if(bars.length){ const last=bars[bars.length-1]; last.className=`deploy-bar ${type}`; last.textContent=text; } }
-function scrollBottom(id){ setTimeout(()=>{ const c=g(id); c.scrollTop=c.scrollHeight; },50); }
-function pickEmoji(idx,btn){
-  if(epickEl){epickEl.remove();epickEl=null;return;}
-  const p=document.createElement("div");p.className="epick";
-  CONFIG.EMOJIS.forEach(em=>{const s=document.createElement("span");s.className="eo";s.textContent=em;s.onclick=()=>{members[idx].emoji=em;btn.textContent=em;p.remove();epickEl=null;};p.appendChild(s);});
-  const r=btn.getBoundingClientRect();p.style.top=(r.bottom+4)+"px";p.style.left=r.left+"px";
-  document.body.appendChild(p);epickEl=p;
-  setTimeout(()=>document.addEventListener("click",()=>{p.remove();epickEl=null;},{once:true}),10);
-}
+// ── RENDER HELPERS ────────────────────────────────
+function appendUserMsg(text, id) { const c=g(id);const el=document.createElement("div");el.className="mu";el.innerHTML=`<div class="bu">${esc(text)}</div>`;c.appendChild(el);scrollBot(id); }
+function appendAiMsg(text, id)   { const c=g(id);const el=document.createElement("div");el.className="cai";el.innerHTML=`<div style="font-size:18px;flex-shrink:0;padding-top:2px">🤖</div><div class="caibl">${escNl(text)}</div>`;c.appendChild(el);scrollBot(id); }
+function appendSys(text, id)     { const c=g(id);const el=document.createElement("div");el.className="sysmsg";el.textContent=text;c.appendChild(el);scrollBot(id); }
+function appendLoading(id)       { const c=g(id);const el=document.createElement("div");el.className="ld";el.innerHTML='<div class="dots"><span></span><span></span><span></span></div><div class="ldtxt">생각 중...</div>';c.appendChild(el);scrollBot(id);return el; }
+function appendDeployBar(type,text,id){ const c=g(id);const el=document.createElement("div");el.className=`deploy-bar ${type}`;el.textContent=text;c.appendChild(el);scrollBot(id);return el; }
+function scrollBot(id) { setTimeout(()=>{const c=g(id);c.scrollTop=c.scrollHeight;},50); }
+function pickEmoji(idx,btn){if(epickEl){epickEl.remove();epickEl=null;return;}const p=document.createElement("div");p.className="epick";C.EMOJIS.forEach(em=>{const s=document.createElement("span");s.className="eo";s.textContent=em;s.onclick=()=>{members[idx].emoji=em;btn.textContent=em;p.remove();epickEl=null;};p.appendChild(s);});const r=btn.getBoundingClientRect();p.style.top=(r.bottom+4)+"px";p.style.left=r.left+"px";document.body.appendChild(p);epickEl=p;setTimeout(()=>document.addEventListener("click",()=>{p.remove();epickEl=null;},{once:true}),10);}
 
-// ╔══════════════════════════════════════════════════
-// ║  UTILS
-// ╚══════════════════════════════════════════════════
-const g = id => document.getElementById(id);
+// ── UTILS ─────────────────────────────────────────
+const g   = id => document.getElementById(id);
 const ls  = key => localStorage.getItem(key);
 const lss = (key,val) => localStorage.setItem(key,val);
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function escNl(s){return esc(s).replace(/\n/g,"<br>");}
-function cloneDeep(o){return JSON.parse(JSON.stringify(o));}
-function copyText(t){navigator.clipboard?.writeText(t).catch(()=>{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();});}
+function esc(s)    { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function escNl(s)  { return esc(s).replace(/\n/g,"<br>"); }
+function cd(o)     { return JSON.parse(JSON.stringify(o)); }
+function copyText(t){ navigator.clipboard?.writeText(t).catch(()=>{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();}); }
 
-let _toastTimer;
-function toast(msg){
-  clearTimeout(_toastTimer);
-  let el=document.querySelector(".toast");
-  if(!el){el=document.createElement("div");el.className="toast";document.body.appendChild(el);}
-  el.textContent=msg;el.style.opacity="1";
-  _toastTimer=setTimeout(()=>{el.style.opacity="0";setTimeout(()=>el?.remove(),300);},2400);
-}
+let _tt;
+function toast(msg){clearTimeout(_tt);let el=document.querySelector(".toast");if(!el){el=document.createElement("div");el.className="toast";document.body.appendChild(el);}el.textContent=msg;el.style.opacity="1";_tt=setTimeout(()=>{el.style.opacity="0";setTimeout(()=>el?.remove(),300);},2400);}
 </script>
 
 
