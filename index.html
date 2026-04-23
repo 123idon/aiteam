@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/atoda/Downloads/index_7.html -->
+<!-- saved from url=(0045)file:///C:/Users/atoda/Downloads/index_8.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -356,7 +356,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <div class="srow">
             <button class="sbtn" onclick="saveApiKey()">저장</button>
             <button class="sbtn ghost" onclick="testApiKey()">연결 테스트</button>
-            <span id="apikey-stat"><span class="sdot un"></span><span class="sstat">미확인</span></span>
+            <span id="apikey-stat"><span class="sdot ok"></span><span class="sstat">저장됨</span></span>
           </div>
         </div>
 
@@ -432,7 +432,7 @@ function toast(msg){clearTimeout(_tt);let el=document.querySelector(".toast");if
 const C = {
   MODEL:    "claude-sonnet-4-20250514",
   MAX_TOK:  1500,
-  API_URL:  "https://api.anthropic.com/v1/messages",
+  API_URL:  "https://throbbing-band-50a5.atoda94.workers.dev",
   R2:       true,   // 2라운드 토론
   WIN:      20,     // Claude 채팅 슬라이딩 윈도우
   P_IN:     3.0,    // USD per 1M input tokens
