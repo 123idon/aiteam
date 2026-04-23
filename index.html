@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/atoda/Downloads/index_5.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>AI Team</title>
 <style>
@@ -201,10 +201,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="logo">AI TEAM</div>
   <div class="ver">v4.0</div>
   <div class="tabs">
-    <button class="tab on" onclick="switchTab(&#39;disc&#39;,this)">💬 토론</button>
-    <button class="tab" onclick="switchTab(&#39;dev&#39;,this)">🤖 Claude</button>
-    <button class="tab" onclick="switchTab(&#39;usage&#39;,this)">📊 사용량</button>
-    <button class="tab" onclick="switchTab(&#39;settings&#39;,this)">⚙ 설정</button>
+    <button class="tab on"  onclick="switchTab('disc',this)">💬 토론</button>
+    <button class="tab"     onclick="switchTab('dev',this)">🤖 Claude</button>
+    <button class="tab"     onclick="switchTab('usage',this)">📊 사용량</button>
+    <button class="tab"     onclick="switchTab('settings',this)">⚙ 설정</button>
   </div>
   <div id="badges"></div>
   <div class="rbar">
@@ -217,8 +217,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <!-- 팀 설정 패널 -->
   <div id="panel">
     <div class="ptabs">
-      <button class="ptab on" onclick="switchPTab(&#39;edit&#39;,this)">✏️ 편집</button>
-      <button class="ptab" onclick="switchPTab(&#39;saved&#39;,this)">💾 저장</button>
+      <button class="ptab on" onclick="switchPTab('edit',this)">✏️ 편집</button>
+      <button class="ptab"    onclick="switchPTab('saved',this)">💾 저장</button>
     </div>
     <div class="pbody on" id="pb-edit">
       <div class="pscroll">
@@ -234,7 +234,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div>
           <div class="sec">SAVE TEAM</div>
           <div class="sv-row">
-            <input class="sv-inp" id="sv-name" placeholder="팀 이름...">
+            <input class="sv-inp" id="sv-name" placeholder="팀 이름..."/>
             <button class="sv-btn" onclick="saveTeam()">저장</button>
           </div>
         </div>
@@ -245,7 +245,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <div class="hmsg">어떤 목적의 팀인지 알려주시면 구성을 제안해드릴게요.</div>
         </div>
         <div class="hrow">
-          <input class="h-inp" id="h-inp" placeholder="어떤 팀이 필요하세요?" onkeydown="if(event.key===&#39;Enter&#39;)sendHelper()">
+          <input class="h-inp" id="h-inp" placeholder="어떤 팀이 필요하세요?" onkeydown="if(event.key==='Enter')sendHelper()"/>
           <button class="h-go" onclick="sendHelper()">↑</button>
         </div>
       </div>
@@ -278,7 +278,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div class="irow">
           <textarea class="ibox" id="d-inp" placeholder="주제나 질문을 입력하세요..." rows="1"></textarea>
           <div class="ibtns">
-            <button class="ib mic" id="mic-d" onclick="toggleMic(&#39;d&#39;)" title="음성입력">🎤</button>
+            <button class="ib mic" id="mic-d" onclick="toggleMic('d')" title="음성입력">🎤</button>
             <button class="ib send" id="send-d" onclick="sendDisc()">↑</button>
           </div>
         </div>
@@ -300,7 +300,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         <div class="irow">
           <textarea class="ibox" id="c-inp" placeholder="Claude에게 말하세요. 앱 수정 요청도 가능합니다..." rows="1"></textarea>
           <div class="ibtns">
-            <button class="ib mic" id="mic-c" onclick="toggleMic(&#39;c&#39;)" title="음성입력">🎤</button>
+            <button class="ib mic" id="mic-c" onclick="toggleMic('c')" title="음성입력">🎤</button>
             <button class="ib send" id="send-c" onclick="sendDev()">↑</button>
           </div>
         </div>
@@ -326,7 +326,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <tbody id="u-daily"></tbody>
         </table>
         <div style="margin-top:14px">
-          <button class="xbtn" onclick="if(confirm(&#39;사용량 기록을 초기화할까요?&#39;))resetUsage()">기록 초기화</button>
+          <button class="xbtn" onclick="if(confirm('사용량 기록을 초기화할까요?'))resetUsage()">기록 초기화</button>
         </div>
       </div>
     </div>
@@ -342,11 +342,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <div class="scard-title">🔑 Anthropic API Key</div>
           <div class="scard-desc">
             Claude API를 사용하기 위한 키입니다.<br>
-            <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a> → API Keys → Create Key
+            <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys → Create Key
           </div>
           <div class="sfield">
             <label>API KEY</label>
-            <input class="sinp" id="s-apikey" type="password" placeholder="sk-ant-api03-...">
+            <input class="sinp" id="s-apikey" type="password" placeholder="sk-ant-api03-..."/>
           </div>
           <div class="srow">
             <button class="sbtn" onclick="saveApiKey()">저장</button>
@@ -365,23 +365,23 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           </div>
           <div class="sfield">
             <label>GITHUB TOKEN</label>
-            <input class="sinp" id="s-ghtoken" type="password" placeholder="ghp_xxxxxxxxxxxx">
+            <input class="sinp" id="s-ghtoken" type="password" placeholder="ghp_xxxxxxxxxxxx"/>
           </div>
           <div class="sfield">
             <label>GITHUB USERNAME</label>
-            <input class="sinp" id="s-ghowner" placeholder="예: 123idon">
+            <input class="sinp" id="s-ghowner" placeholder="예: 123idon"/>
           </div>
           <div class="sfield">
             <label>REPO NAME</label>
-            <input class="sinp" id="s-ghrepo" placeholder="예: aiteam">
+            <input class="sinp" id="s-ghrepo" placeholder="예: aiteam"/>
           </div>
           <div class="sfield">
             <label>BRANCH (기본: main)</label>
-            <input class="sinp" id="s-ghbranch" placeholder="main">
+            <input class="sinp" id="s-ghbranch" placeholder="main"/>
           </div>
           <div class="sfield">
             <label>FILE PATH (기본: index.html)</label>
-            <input class="sinp" id="s-ghpath" placeholder="index.html">
+            <input class="sinp" id="s-ghpath" placeholder="index.html"/>
           </div>
           <div class="srow">
             <button class="sbtn" onclick="saveGithub()">저장</button>
@@ -1041,6 +1041,5 @@ function copyText(t){ navigator.clipboard?.writeText(t).catch(()=>{const ta=docu
 let _tt;
 function toast(msg){clearTimeout(_tt);let el=document.querySelector(".toast");if(!el){el=document.createElement("div");el.className="toast";document.body.appendChild(el);}el.textContent=msg;el.style.opacity="1";_tt=setTimeout(()=>{el.style.opacity="0";setTimeout(()=>el?.remove(),300);},2400);}
 </script>
-
-
-</body></html>
+</body>
+</html>
