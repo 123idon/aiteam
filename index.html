@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/atoda/Downloads/index_11.html -->
+<!-- saved from url=(0046)file:///C:/Users/atoda/Downloads/index_13.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -645,17 +645,18 @@ async function commitToGitHub(html) {
   const path   = ls(C.SK.GHPATH)   || "index.html";
   if(!token||!owner||!repo) throw new Error("GitHub 설정이 없습니다. ⚙ 설정 탭에서 입력해주세요.");
 
-  const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`, {
-    headers: { Authorization: `token ${token}`, Accept: "application/vnd.github.v3+json" }
-  });
+  // GitHub API는 CORS 문제 없으므로 직접 호출 (Worker 거치지 않음)
+  const GH = "https://api.github.com";
+  const headers = { Authorization:`token ${token}`, Accept:"application/vnd.github.v3+json", "Content-Type":"application/json" };
+
+  const getRes = await fetch(`${GH}/repos/${owner}/${repo}/contents/${path}?ref=${branch}`, { headers });
   if(!getRes.ok) throw new Error(`파일 조회 실패 (${getRes.status})`);
   const { sha } = await getRes.json();
 
   const now = new Date().toISOString().slice(0,16).replace("T"," ");
   const content = btoa(unescape(encodeURIComponent(html)));
-  const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-    method: "PUT",
-    headers: { Authorization:`token ${token}`, Accept:"application/vnd.github.v3+json", "Content-Type":"application/json" },
+  const putRes = await fetch(`${GH}/repos/${owner}/${repo}/contents/${path}`, {
+    method: "PUT", headers,
     body: JSON.stringify({ message:`AI Team auto-update ${now}`, content, sha, branch }),
   });
   if(!putRes.ok) { const e = await putRes.json(); throw new Error(e.message || `커밋 실패 (${putRes.status})`); }
